@@ -1,0 +1,173 @@
+<!-- CSS part – gaps fixed, only active panel visible -->
+<style>
+  /* Reset margins inside section */
+  .steps-sec {
+    margin: 0;
+    padding: 0;
+  }
+
+  .steps-head {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .steps-h2, .steps-h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Sticky wrapper – exactly 50px gap from heading */
+  .steps-sticky-wrap {
+    position: relative;
+    height: 200vh;          /* provides scroll for 3 panels */
+    margin-top: 50px;       /* 50px gap from heading */
+    margin-bottom: 0;
+    padding: 0;
+  }
+
+  .steps-sticky-inner {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .steps-left {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Panel hiding/showing */
+  .step-text-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+
+  .step-text-panel.stp-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Remove any bottom gap from next section */
+  .steps-cta-row {
+    margin-top: 0;
+    padding-top: 2rem;
+  }
+
+  .email-pill-box {
+    margin-top: 0;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+</style>
+
+<!-- GSAP and ScrollTrigger (mandatory) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Your panels
+  const txtPanels = [
+    document.getElementById('stp-1'),
+    document.getElementById('stp-2'),
+    document.getElementById('stp-3')
+  ];
+  let currentStep = -1;
+
+  function activateStep(n) {
+    if (n === currentStep) return;
+    currentStep = n;
+    txtPanels.forEach((p, i) => {
+      p.classList.toggle('stp-active', i === n);
+    });
+  }
+
+  // Only on desktop
+  if (window.innerWidth > 991) {
+    ScrollTrigger.create({
+      trigger: '#steps-sticky-wrap',
+      start: 'top top',         // wrapper ke top par trigger
+      end: 'bottom bottom',
+      pin: '#steps-sticky-inner',
+      pinSpacing: false,        // no extra spacer
+      onUpdate: (self) => {
+        const p = self.progress;
+        if (p < 0.34) activateStep(0);
+        else if (p < 0.67) activateStep(1);
+        else activateStep(2);
+      },
+      onEnter: () => activateStep(0),
+      onLeaveBack: () => activateStep(0)
+    });
+  }
+
+  // Default first panel visible
+  activateStep(0);
+</script>
+
+<!-- Your HTML (same as you gave, no changes except removing extra spaces) -->
+<section class="steps-sec" id="how-it-works">
+  <div class="container">
+    <div class="steps-head">
+      <h2 class="steps-h2">From conversation to book.</h2>
+      <h3 class="steps-h3 text-cta">Three Steps. That's it</h3>
+    </div>
+  </div>
+
+  <div class="steps-sticky-wrap" id="steps-sticky-wrap">
+    <div class="steps-sticky-inner" id="steps-sticky-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="steps-left" id="steps-left">
+              <div class="step-text-panel stp-active" id="stp-1">
+                <img class="w-100" src="assets/images/p1.png" alt="">
+              </div>
+              <div class="step-text-panel" id="stp-2">
+                <img class="w-100" src="assets/images/p2.png" alt="">
+              </div>
+              <div class="step-text-panel" id="stp-3">
+                <img class="w-100" src="assets/images/p3.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps-cta-row text-center">
+    <div class="container">
+      <div class="email-pill-box">
+        <button class="btn-white">...</button>
+        <button class="btn-orange">Join the waitlist</button>
+      </div>
+      <p class="steps-disc">Your stories stay yours. Never used to train AI.</p>
+    </div>
+  </div>
+</section>
