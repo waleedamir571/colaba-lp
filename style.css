@@ -16,7 +16,7 @@
   --cta: #e8ac50;
   --cta-h: #d49a3a;
   --muted: #926faf;
-  --text2: #6b6560;
+  --text2:  #2D3436;;
   --border: rgba(0, 0, 0, 0.08);
   --font-body: 'Lato', sans-serif;
   --font-ui: 'Inter', sans-serif;
@@ -25,6 +25,10 @@
 
 .w-100 {
   width: 100%;
+}
+
+b, strong {
+    font-weight: 800 !important;
 }
 
 *,
