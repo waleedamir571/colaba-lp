@@ -220,45 +220,73 @@ gsap.utils.toArray('.wcard').forEach((card, i) => {
    6. STEPS — Sticky scroll with ScrollTrigger pin
    Progress 0→.33 = step1, .33→.66 = step2, .66→1 = step3
 ────────────────────────────────────────────────── */
-(function(){
-  const txtPanels = [
-    document.getElementById('stp-1'),
-    document.getElementById('stp-2'),
-    document.getElementById('stp-3')
-  ];
-  let currentStep = -1;
+(function () {
+  gsap.registerPlugin(ScrollTrigger);
 
-  function activateStep(n){
-    if(n === currentStep) return;
-    currentStep = n;
-    txtPanels.forEach((p, i) => {
-      p.classList.toggle('stp-active', i === n);
-    });
-  }
+  const section  = document.getElementById('reveal-section');
+  const panels   = gsap.utils.toArray('.reveal-panel');
+  const clips    = gsap.utils.toArray('.reveal-clip');
+  const imgs     = gsap.utils.toArray('.reveal-panel img');
+  const total    = panels.length;
 
-  if(window.innerWidth > 767){
-    ScrollTrigger.create({
-      trigger: '#steps-sticky-wrap',
-      start: 'top top',
-      end: 'bottom bottom',
-      pin: '#steps-sticky-inner',
-      pinSpacing: false,        /* ZAROOR false — warna GSAP khud height add karta hai */
-      onUpdate(self){
-        const p = self.progress;
-        if(p < 0.34)      activateStep(0);
-        else if(p < 0.67) activateStep(1);
-        else               activateStep(2);
-      },
-      onEnter(){ activateStep(0); },
-      onLeaveBack(){ activateStep(0); }
-    });
-  }
+  /* ── 1. Set initial states ── */
+  gsap.set(clips[0], { clipPath: 'inset(0 0 0% 0)' });     /* Panel 1 fully visible */
+  gsap.set(imgs[0],  { scale: 1, yPercent: 0 });
 
-  activateStep(0);
+  clips.slice(1).forEach((c, i) => {
+    gsap.set(c, { clipPath: 'inset(0 0 100% 0)' });        /* Panels 2–3 fully hidden */
+    gsap.set(imgs[i + 1], { scale: 1, yPercent: 0 });   /* No scale/shift for sharp image */
+  });
+
+  /* ── 2. Master timeline scrubbed to scroll ── */
+  const tl = gsap.timeline({ paused: true });
+
+  /*
+   * Each panel transition occupies 1 unit of the timeline.
+   * Total timeline length = total - 1 transitions (between 3 panels = 2 transitions).
+   * ScrollTrigger maps scroll progress → timeline progress.
+   */
+  panels.slice(1).forEach((panel, i) => {
+    const clip    = clips[i + 1];
+    const img     = imgs[i + 1];
+    const prevImg = imgs[i];
+
+    const startPos = i;       /* Timeline position this transition begins */
+
+    tl.to(clip, {
+      clipPath: 'inset(0 0 0% 0)',   /* Wipe open: bottom edge rises from 100% → 0% */
+      duration: 1,
+      ease: 'power2.inOut'
+    }, startPos);
+
+    /* Removed scale animations to keep images sharp */
+  });
+
+  /* ── 3. ScrollTrigger binds scroll to timeline ── */
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',              /* 0px gap at top */
+    end: 'bottom bottom',          /* 0px gap at bottom */
+    scrub: 0.6,                    /* Lag behind scroll slightly — smoother than scrub: true */
+    anticipatePin: 1,              /* Pre-calculates sticky position — no flash on entry */
+    onUpdate(self) {
+      /* Map scroll progress → timeline progress */
+      const progress = self.progress * (total - 1);
+      tl.progress(progress / (total - 1));
+    }
+  });
+
+  /* ── 4. Pin handled by CSS sticky — no GSAP pin needed ── */
+  /*
+   * Using native CSS `position: sticky` instead of GSAP pin avoids
+   * the extra scroll space GSAP's pinSpacing adds. This is what
+   * achieves the true 0px top/bottom gap.
+   */
+
 })();
 
 /* ──────────────────────────────────────────────────
-   8. TESTIMONIALS SLIDER — Super simple smooth version
+   8. TESTIMONIALS SLIDER — Smooth slide + fade animation
 ────────────────────────────────────────────────── */
 (function(){
   const ALL = [
@@ -270,70 +298,69 @@ gsap.utils.toArray('.wcard').forEach((card, i) => {
       text:'"Coming across Colaba was a revelation. I had been staring at a blank page for months. Within one afternoon, I had a full outline and knew exactly what my book needed to be."' }
   ];
 
-  let center = 1;
-  const cards = document.querySelectorAll('.tcard');
+  let current = 0;
+  let isAnimating = false;
 
-  function idx(offset){
-    return ((center + offset) % ALL.length + ALL.length) % ALL.length;
-  }
+  const outer  = document.querySelector('.testi-track-outer');
+  const cards  = Array.from(document.querySelectorAll('.tcard'));
 
-  function fill(card, data){
+  // Fixed classes — never change
+  cards[0].className = 'tcard tcard-side';
+  cards[1].className = 'tcard tcard-center';
+  cards[2].className = 'tcard tcard-side';
+
+  function fillCard(card, data) {
     card.querySelector('.tcard-uinfo strong').textContent = data.name;
     card.querySelector('.tcard-uinfo span').textContent   = data.role;
     card.querySelector('.tcard-text').textContent         = data.text;
   }
 
-  function render(){
-    // Only fill content, don't change positions
-    const positions = [idx(-1), idx(0), idx(1)];
-    positions.forEach((dataIdx, pos) => {
-      fill(cards[pos], ALL[dataIdx]);
-      // Don't change classes - positions stay fixed
-    });
+  // Initial fill
+  function fillAll() {
+    fillCard(cards[0], ALL[(current + ALL.length - 1) % ALL.length]);
+    fillCard(cards[1], ALL[current]);
+    fillCard(cards[2], ALL[(current + 1) % ALL.length]);
   }
+  fillAll();
 
-  function next(){
-    // Create smooth card fade timeline - pure fade only, no movement
-    const tl = gsap.timeline();
-    
-    // Fade out entire cards - no Y movement
-    tl.to(cards, { 
-      opacity: 0, 
-      duration: 0.4, 
-      ease: 'power2.inOut',
-      stagger: 0.05
-    })
-    // Change content during fade
-    .call(() => {
-      center = (center + 1) % ALL.length;
-      // Update content but don't change card positions/classes
-      const positions = [idx(-1), idx(0), idx(1)];
-      positions.forEach((dataIdx, pos) => {
-        fill(cards[pos], ALL[dataIdx]);
-        // Keep original classes - no position changes
-      });
-    })
-    // Fade entire cards back in - no Y movement
-    .to(cards, { 
-      opacity: 1, 
-      duration: 0.5, 
-      ease: 'power2.out',
-      stagger: 0.08
+  function slideTo() {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // Step 1: Slide current cards OUT to left — no full disappear
+    gsap.to(cards, {
+      x: -60,
+      opacity: 0.15,
+      duration: 0.4,
+      ease: 'power2.in',
+      stagger: 0.04,
+      onComplete: () => {
+
+        // Step 2: Update data
+        current = (current + 1) % ALL.length;
+        fillAll();
+
+        // Step 3: Set cards to right side instantly
+        gsap.set(cards, { x: 60, opacity: 0.15 });
+
+        // Step 4: Slide IN from right — smooth
+        gsap.to(cards, {
+          x: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power2.out',
+          stagger: 0.04,
+          onComplete: () => {
+            isAnimating = false;
+          }
+        });
+      }
     });
   }
 
   // Auto-rotate every 4 seconds
-  setInterval(next, 4000);
+  setInterval(slideTo, 4000);
 
-  // Initial setup - set fixed positions once
-  if (cards.length >= 3) {
-    cards[0].className = 'tcard tcard-side';  // Left side
-    cards[1].className = 'tcard tcard-center'; // Center (always elevated)
-    cards[2].className = 'tcard tcard-side';   // Right side
-  }
-  
-  // Initial render
-  render();
 })();
 
 /* ──────────────────────────────────────────────────

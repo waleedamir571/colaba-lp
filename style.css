@@ -1364,7 +1364,7 @@ span#typed-text {
 
 /* ── Steps Section ── */
 .steps-sec {
-  padding-top: 15px;
+  padding-top: 50px;
   padding-bottom: 15px;
 }
 
@@ -1373,86 +1373,85 @@ span#typed-text {
 }
 
 /* ── Sticky Scroll Wrapper ── */
-.steps-sticky-wrap {
-  height: 250vh;
+.reveal-section {
+  height: 300vh;         /* 100vh visible + 200vh scroll travel for 3 panels */
   position: relative;
-  margin: 0;
-  padding: 0;
+  overflow: clip;        /* Clips overflowing panels without affecting scroll */
 }
 
-.steps-sticky-inner {
+/* ─── Sticky viewport ─── */
+.reveal-sticky {
   position: sticky;
-  top: 0;
+  top: 0;                /* Flush to viewport top — 0px gap */
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
   overflow: hidden;
-  padding: 0;
-  margin: 0;
 }
 
-.steps-left {
+/* ─── Stage: all panels stack here ─── */
+.reveal-stage {
   position: relative;
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.step-text-panel {
+/* ─── Individual panel ─── */
+.reveal-panel {
   position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  transform: translateY(-50%) translateY(28px);
-  opacity: 0;
-  transition: opacity .55s ease, transform .55s ease;
-  pointer-events: none;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;         /* Inner breathing room — no outer gap */
+  will-change: transform;
+  opacity: 1 !important;
 }
 
-.step-text-panel img {
-  max-height: 85vh;
+/* ─── Clip wrapper — controls the wipe reveal ─── */
+.reveal-clip {
+  width: 100%;
+  /* max-width: 900px; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: inset(0 0 100% 0);  /* Starts fully clipped — GSAP animates this open */
+  will-change: clip-path;
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* ─── Image ─── */
+.reveal-panel img {
   width: auto;
+  height: 100%;
   max-width: 100%;
+  max-height: 85vh;
   object-fit: contain;
   display: block;
-  margin: 0 auto;
+  will-change: auto;
+  border-radius: 12px;   /* Optional: softens edge for premium feel */
+  opacity: 1 !important;
+  filter: none !important;
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
-.step-text-panel.stp-active {
-  opacity: 1;
-  transform: translateY(-50%);
-  pointer-events: auto;
-}
+/* ─── Responsive ─── */
+@media (max-width: 767px) {
+  .reveal-panel {
+    padding: 20px;
+  }
 
-/* ── Step Text Parts ── */
-.step-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  margin-bottom: 10px;
-  display: block;
-}
-
-.step-title {
-  font-family: var(--font-body);
-  font-weight: 900;
-  font-size: clamp(24px, 3vw, 44px);
-  color: var(--primary);
-  letter-spacing: -1px;
-  margin-bottom: 16px;
-  line-height: 1.12;
-}
-
-.step-body {
-  font-family: var(--font-body);
-  font-size: clamp(14px, 1.4vw, 18px);
-  color: var(--text2);
-  line-height: 1.8;
-  margin-bottom: 22px;
+  .reveal-panel img {
+    max-height: 80vh;
+  }
 }
 
 /* ── Mobile (767px aur neeche) ── */
@@ -2067,7 +2066,12 @@ span#typed-text {
   padding: 30px 0 50px;
 } */
 
+
+
+
+
 /* fade edges left/right */
+/* ── track: 3 cards aligned by JS transform ── */
 .testi-track-outer::before,
 .testi-track-outer::after {
   content: '';
@@ -2089,11 +2093,9 @@ span#typed-text {
   background: linear-gradient(to left, white, transparent)
 }
 
-/* ── track: 3 cards aligned by JS transform ── */
 .testi-track {
   display: flex;
   align-items: flex-end;
-  /* bottom-aligned so center appears higher */
   justify-content: center;
   gap: 20px;
   transition: transform .55s cubic-bezier(.4, 0, .2, 1);
@@ -2107,10 +2109,8 @@ span#typed-text {
     box-shadow .55s cubic-bezier(.4, 0, .2, 1);
 }
 
-/* ── cards ── */
 .tcard {
   flex-shrink: 0;
-  /* width: 430px; */
   width: 844.144px;
   border-radius: 13.793px;
   border: 0.92px solid rgba(0, 0, 0, 0.15);
@@ -2130,7 +2130,6 @@ span#typed-text {
   }
 }
 
-/* CENTER card — elevated more, larger, shadow */
 .tcard-center {
   width: 844.144px;
   height: 273.105px;
@@ -2142,11 +2141,29 @@ span#typed-text {
   z-index: 4;
 }
 
-/* SIDE cards — lower, faded, slightly scaled */
 .tcard-side {
   opacity: .55;
   transform: translateY(0) scale(.96);
   z-index: 2;
+}
+
+/* ── ANIMATION ADDITIONS ONLY — kuch bhi nahi hata ── */
+.testi-track-outer {
+  position: relative;
+  overflow: visible !important;
+}
+
+.testi-track {
+  position: relative;
+  will-change: transform, opacity;
+}
+
+.tcard {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: box-shadow 0.6s cubic-bezier(.4,0,.2,1),
+              border 0.3s ease;
 }
 
 @media(max-width:860px) {
@@ -2449,7 +2466,7 @@ span#typed-text {
 
 .footer-cta-copy p {
 
-  font-size: 38px;
+  font-size: 31px;
   color: var(--primary);
   line-height: 1.35;
   /* max-width: 583px; */
@@ -2586,7 +2603,7 @@ span#typed-text {
   }
 
   .footer-cta-copy p {
-    font-size: 32px;
+    font-size: 28px;
     color: var(--primary);
     line-height: 1.35;
     /* max-width: 583px; */

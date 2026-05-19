@@ -261,21 +261,16 @@ p {
 }
 
 .qs-left-sticky {
-  position: sticky;
-  top: 90px;
-  /* width: calc(100% + ((100vw - 100%) / 2)); */
-  margin-left: calc(-1 * ((57vw - 100%) / 2));
-  width: 1200px;
+    position: sticky;
+    top: 90px;
+    width: calc(100% + ((100vw - 222%) / 3));
+    margin-left: calc(-1 * ((100vw - 243%) / 2));
 }
-
 .qs-left-img {
-  width: 60%;
-  height: auto;
-  display: block;
-  border-radius: 0 16px 16px 0;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: auto;
+    display: block;
 }
-
 /* ════════════════════════════
    RIGHT – QUESTIONS LIST
 ════════════════════════════ */
@@ -493,6 +488,12 @@ p {
     width: calc(144% + ((100vw - 100%) / 2));
     /* margin-left: calc(-1 * ((100vw - 100%) / 2)); */
   }
+
+  .qs-left-img {
+    width: 50%;
+    height: auto;
+    display: block;
+}
 
   .h1-orange {
     color: var(--CTA, #E8AC50);

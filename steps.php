@@ -415,13 +415,13 @@
                         <!-- LEFT – App Screenshot -->
                         <div class="col-lg-5 col-12">
                             <div class="qs-left-sticky">
-                                <img src="assets/lp2/arac.png" alt="Colaba App" class="qs-left-img" data-aos="fade-up"
+                                <img src="assets/lp2/7steps.png" alt="Colaba App" class="qs-left-img" data-aos="fade-up"
                                     data-aos-delay="1000" data-aos-duration="800" data-aos-easing="ease-out-cubic">
                             </div>
                         </div>
 
                         <!-- RIGHT – 7 Questions -->
-                        <div class="col-lg-6 offset-lg-1 col-12">
+                        <div class="col-lg-6  col-12">
                             <div class="qs-list">
 
                                 <div class="qs-item" data-aos="fade-up" data-aos-delay="0" data-aos-duration="600">
