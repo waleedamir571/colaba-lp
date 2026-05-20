@@ -6,7 +6,7 @@
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="footer-cta-copy">
-                <p>You've already spent years thinking about a book.<span class="text-cta">Spend 15 Sec joining 
+                <p>You've already spent years thinking about a book. <span class="text-cta"> Spend 15 Sec joining 
                     the
                     waitlist</span></p>
               </div>
@@ -45,7 +45,7 @@
     <div class="footer-bar">
       <div class="container">
         <div class="footer-bar-inner">
-          <p>© 2026 Duremere AI Solutions. <span style="color:#6b6560">All Rights Reserved.</span></p>
+          <p>© 2026 Duremere AI Solutions. All Rights Reserved.</p>
           <p><span style="color:rgba(45,52,54,.2)">| </span><a href="#">Privacy Policy</a><span
               style="color:rgba(45,52,54,.2)"> | </span><a href="#" style="color:#6b6560">Terms of Service</a></p>
         </div>

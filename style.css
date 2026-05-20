@@ -6,8 +6,10 @@
 
 
 
-@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat:ital@0;1&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Cal+Sans&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Manrope:wght@200..800&family=Montserrat:ital@0;1&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   --bg: #faf7f4;
@@ -18,7 +20,7 @@
   --muted: #926faf;
   --text2:  #2D3436;;
   --border: rgba(0, 0, 0, 0.08);
-  --font-body: 'Lato', sans-serif;
+  --font-body: "Cal Sans", sans-serif;
   --font-ui: 'Inter', sans-serif;
   --font-serif: 'Lora', serif;
 }
@@ -37,7 +39,7 @@ b, strong {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Lato", sans-serif !important;
+  font-family: "Cal Sans", sans-serif;
 }
 
 .visualizer-card {
@@ -271,18 +273,20 @@ svg path {
 }
 
 .btn-orange {
-  background: #E8A020;
-  color: #ffffff;
-  border: none;
-  padding: 12px 20px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  border-radius: 0 6px 6px 0;
-  transition: background 0.2s ease;
-  flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--cta);
+    color: #2D3436;
+    border: none;
+    padding: 11px 28px;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .2s, transform .15s;
+    white-space: nowrap;
 }
 
 .btn-orange:hover {
@@ -416,10 +420,9 @@ body {
   border-radius: 25.657px;
   background: #FFF;
   color: #181815;
-
   font-size: 17.104px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 130%;
   /* 22.236px */
   border: none;
@@ -436,14 +439,16 @@ a {
 
 .text-cta {
   color: var(--cta);
-  font-weight: 700;
+  font-weight: 400;
   display: inline-block;
   min-width: 280px;
   text-align: left;
+  letter-spacing: 1px;
 }
 
 .text-purple {
-  color: var(--muted)
+  color: var(--muted);
+  font-family: Inter !important;
 }
 
 /* ── Buttons ── */
@@ -457,7 +462,7 @@ a {
   padding: 11px 28px;
   border-radius: 100px;
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 17px;
   cursor: pointer;
   transition: background .2s, transform .15s;
@@ -508,6 +513,7 @@ a {
 
 span#typed-text {
   text-transform: capitalize;
+  letter-spacing: 0.92px;
 }
 
 .yellow {
@@ -644,14 +650,14 @@ span#typed-text {
 }
 
 .hero-h1 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(32px, 5vw, 68px);
   color: var(--primary);
   letter-spacing: -2px;
   line-height: 1.1;
   min-height: 1.3em;
   margin-bottom: 20px;
+  letter-spacing: 0.92px;
 }
 
 .type-cursor {
@@ -681,6 +687,7 @@ span#typed-text {
   /* max-width: 680px; */
   margin-left: auto;
   margin-right: auto;
+  font-family: Inter !important;
 }
 
 .hero-email-wrap {
@@ -729,9 +736,10 @@ span#typed-text {
 
 .hero-disclaimer {
   font-size: 12px;
-  color: var(--text2);
+  color: #6B6560;
   opacity: .6;
-  margin-top: 12px
+  margin-top: 12px;
+  font-family: Inter !important;
 }
 
 /* hero mockup */
@@ -779,7 +787,7 @@ span#typed-text {
 }
 
 .cu-brand {
-  font-family: 'Poppins', sans-serif;
+  
   font-weight: 700;
   font-size: 16px;
   color: white
@@ -1072,7 +1080,8 @@ span#typed-text {
   color: var(--text2);
   opacity: 1;
   margin-bottom: 20px;
-  text-align: center
+  text-align: center;
+  font-family: Inter !important;
 }
 
 .marquee-outer {
@@ -1127,7 +1136,7 @@ span#typed-text {
 }
 
 .mq-set span {
-  font-family: 'Poppins', sans-serif;
+  
   font-weight: 700;
   font-size: 15px;
   color: var(--primary);
@@ -1154,18 +1163,20 @@ span#typed-text {
 
 .why-h2 {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 400;
   font-size: clamp(28px, 4vw, 57px);
   color: var(--primary);
   line-height: 1.15;
-  letter-spacing: -1.5px;
+  /* letter-spacing: -1.5px; */
   margin-bottom: 16px;
+  letter-spacing: 1px;
 }
 
 .why-sub {
   font-family: var(--font-ui);
   font-size: clamp(13px, 1.5vw, 18px);
-  color: var(--text2)
+  color: var(--text2);
+  font-family: Inter !important;
 }
 
 /* 3 card row – Figma: 3 equal cols, middle highlighted orange */
@@ -1294,7 +1305,7 @@ span#typed-text {
 
 /* ---------- TYPOGRAPHY ---------- */
 .wcard-title {
-  font-weight: 700;
+  font-weight: 400;
   font-size: 27px;
   color: var(--primary);
   margin-bottom: 14px;
@@ -1320,6 +1331,8 @@ span#typed-text {
   font-size: clamp(13px, 1.2vw, 16px);
   color: var(--text2);
   line-height: 1.7;
+  font-family: Inter !important;
+  font-weight: 400;
 }
 
 .pricingques {
@@ -1346,18 +1359,19 @@ span#typed-text {
   color: var(--primary, #2D3436);
   font-size: 75.701px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 80.694px;
-  letter-spacing: -3.821px;
+  /* letter-spacing: -3.821px; */
+  letter-spacing: 0.917px;
 }
 
 .steps-h3 {
   color: var(--CTA, #E8AC50);
   font-size: 71.058px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 75.519px;
-  letter-spacing: -3.576px;
+  letter-spacing: 0.716px;
 }
 
 
@@ -1887,14 +1901,15 @@ span#typed-text {
   white-space: nowrap;
   flex-shrink: 0;
   height: fit-content;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .steps-disc {
   font-size: 12px;
   color: var(--text2);
   opacity: .65;
-  margin-top: 0
+  margin-top: 0;
+  font-family: Inter !important;
 }
 
 
@@ -1968,7 +1983,7 @@ span#typed-text {
 
 .speak-h2 {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 88px;
   color: var(--primary);
   letter-spacing: -3px;
@@ -1984,6 +1999,7 @@ span#typed-text {
   max-width: 860px;
   margin: 0 auto 48px;
   line-height: 1.6;
+  font-family: Inter !important;
 }
 
 .speak-card-wrap {
@@ -2021,7 +2037,7 @@ span#typed-text {
 
 .speak-tap-label {
   font-family: var(--font-body);
-  font-weight: 600;
+  font-weight: 400;
   font-size: 36px;
   color: var(--primary);
   white-space: nowrap
@@ -2043,7 +2059,7 @@ span#typed-text {
 
 .testi-h2 {
   font-family: var(--font-body);
-  font-weight: 900;
+  font-weight: 400;
   font-size: clamp(30px, 5.5vw, 88px);
   color: var(--primary);
   letter-spacing: -3px;
@@ -2052,11 +2068,7 @@ span#typed-text {
   margin-bottom: 16px;
 }
 
-.testi-sub {
-
-  font-size: 22px;
-  color: var(--text2);
-}
+.testi-sub {font-size: 22px;color: var(--text2);font-family: Inter !important;}
 
 /* ── outer: clips sides, shows peek ── */
 /* .testi-track-outer {
@@ -2216,17 +2228,18 @@ span#typed-text {
 }
 
 .tcard-uinfo strong {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
+  
+  font-weight: 400 !important;
   font-size: 17px;
   color: rgba(31, 31, 31, .9)
 }
 
 .tcard-uinfo span {
-  font-family: 'Poppins', sans-serif;
+  
   font-size: 15px;
   color: rgba(31, 31, 31, .55);
-  font-weight: 400
+  font-weight: 400;
+  font-family: Inter !important;
 }
 
 .tcard-text {
@@ -2236,6 +2249,8 @@ span#typed-text {
   font-weight: 400;
   line-height: 31.265px;
   /* 154.545% */
+  font-family: Inter !important;
+      opacity: 0.8;
 }
 
 .tcard-stars {
@@ -2301,19 +2316,13 @@ span#typed-text {
   background: var(--bg)
 }
 
-.pricing-h2 {
-
-  font-weight: 700;
-  font-size: clamp(28px, 5vw, 83px);
-  color: var(--primary);
-  letter-spacing: -3px;
-  margin-bottom: 16px;
-}
+.pricing-h2 {font-weight: 400;font-size: clamp(28px, 5vw, 83px);color: var(--primary);letter-spacing: -3px;margin-bottom: 16px;}
 
 .pricing-sub {
   font-size: clamp(14px, 1.6vw, 22px);
   color: var(--primary);
-  margin-bottom: 56px
+  margin-bottom: 56px;
+  font-family: Inter !important;
 }
 
 /* dark panel – exact Figma #2d3436 */
@@ -2356,7 +2365,7 @@ span#typed-text {
 
 .pc-big-price {
   font-family: var(--font-body);
-  font-weight: 700;
+  font-weight: 400;
   font-size: clamp(24px, 3.5vw, 54px);
   color: white;
   opacity: .3;
@@ -2391,7 +2400,7 @@ span#typed-text {
 
 .pc-colaba-big {
   font-family: var(--font-body);
-  font-weight: 900;
+  font-weight: 400;
   font-size: clamp(24px, 3.5vw, 52px);
   color: var(--cta);
   letter-spacing: -2px
@@ -2449,6 +2458,24 @@ span#typed-text {
   border-radius: 32.805px;
   background: var(--Secondary, #FAF7F4);
   border: none;
+  font-family: Inter !important;
+}
+
+.footer-privacy span{
+  font-family: Inter !important;
+}
+
+.footer-privacy {
+  font-family: Inter !important;
+  font-size: 12px;
+  color: #6B6560;
+  opacity: .6 !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+ 
+  font-weight: 400;
 }
 
 /* cta top */
@@ -2484,15 +2511,7 @@ span#typed-text {
   margin-bottom: 12px
 }
 
-.footer-privacy {
-  font-size: 12px;
-  color: var(--text2);
-  opacity: .6;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap
-}
+
 
 .fdot {
   opacity: .5
@@ -2521,6 +2540,7 @@ span#typed-text {
 .footer-bar {
   padding: 26px 0;
   /* border-top: 1px solid var(--border); */
+  font-family: Inter !important;
 }
 
 .footer-bar-inner {
@@ -2533,9 +2553,10 @@ span#typed-text {
 
 .footer-bar-inner p {
   font-size: 15.5px;
-  color: var(--primary);
+  color: #6B6560;
   margin: 0;
   opacity: 0.8;
+  font-family: Inter !important;
 }
 
 .footer-bar-inner a {
@@ -2544,6 +2565,7 @@ span#typed-text {
   opacity: .8;
   transition: opacity .2s;
   font-weight: 400;
+  font-family: Inter !important;
 }
 
 .footer-bar-inner a:hover {
@@ -2611,7 +2633,7 @@ span#typed-text {
   }
 
   .hero-h1 {
-    font-family: 'Poppins', sans-serif;
+    
     font-weight: 800;
     font-size: clamp(32px, 5vw, 53px);
     color: var(--primary);

@@ -371,7 +371,7 @@
   <div class="container">
     <div class="pricing-head text-center">
       <h2 class="pricing-h2">Starting at <span class="text-cta">$26/month</span></h2>
-      <p class="pricing-sub">That's less than <span class="text-purple fw-bold">a coffee a day</span> for your life
+      <p class="pricing-sub">That's less than <span class="text-purple">a coffee a day</span> for your life
         story.</p>
     </div>
     <!-- Dark panel -->
