@@ -42,6 +42,15 @@ b, strong {
   font-family: "Cal Sans", sans-serif;
 }
 
+img.nav-logo-img,
+video.nav-logo-img
+{
+      width: 15%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+}
+
 .visualizer-card {
   /* background: rgba(15, 25, 45, 0.55); */
   backdrop-filter: blur(8px);
@@ -122,11 +131,11 @@ svg path {
 
 .same {
   color: var(--text-2, #6B6560);
-
   font-size: 20.761px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: Inter !important;
 }
 
 .hero-content {
@@ -178,10 +187,9 @@ svg path {
 } */
 .h1-black {
   color: var(--primary, #2D3436);
-
   font-size: 67.945px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 76.438px;
   /* 112.5% */
 }
@@ -211,6 +219,7 @@ svg path {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: Inter !important;
 }
 
 /* Bullets */
@@ -404,11 +413,11 @@ body {
 
 .minutes {
   color: var(--text-2, #6B6560);
-
-  font-size: 20.761px;
+  font-size: 19.761px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: Inter !important;
 }
 
 .btn-white {
@@ -709,7 +718,7 @@ span#typed-text {
   background: transparent;
   border: none;
   border-radius: 0;
-  padding: 0;
+      padding-top: 25px;
   box-shadow: none;
   width: auto;
   overflow: visible;
@@ -1367,7 +1376,7 @@ span#typed-text {
 
 .steps-h3 {
   color: var(--CTA, #E8AC50);
-  font-size: 71.058px;
+  font-size: 66.058px;
   font-style: normal;
   font-weight: 400;
   line-height: 75.519px;
@@ -1386,18 +1395,33 @@ span#typed-text {
   margin-bottom: 10px;
 }
 
-/* ── Sticky Scroll Wrapper ── */
+/* ── Separate Step Sections ── */
+.step-block {
+  padding: 50px 0;
+  width: 100%;
+  position: relative;
+}
+
+.step-block .sp-clip {
+  clip-path: none !important;
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 1 !important;
+}
+
+/* ── Sticky Scroll Wrapper (legacy) ── */
 .reveal-section {
   height: 300vh;         /* 100vh visible + 200vh scroll travel for 3 panels */
   position: relative;
   overflow: clip;        /* Clips overflowing panels without affecting scroll */
 }
 
-/* ─── Sticky viewport ─── */
+/* ─── Sticky viewport — vertically centered in viewport ─── */
 .reveal-sticky {
   position: sticky;
-  top: 0;                /* Flush to viewport top — 0px gap */
-  height: 100vh;
+  top: calc((100vh - 650px) / 2);
+  height: 650px;
   width: 100%;
   overflow: hidden;
 }
@@ -1440,31 +1464,39 @@ span#typed-text {
 
 /* ─── Image ─── */
 .reveal-panel img {
-  width: auto;
-  height: 100%;
-  max-width: 100%;
-  max-height: 85vh;
-  object-fit: contain;
-  display: block;
-  will-change: auto;
-  border-radius: 12px;   /* Optional: softens edge for premium feel */
-  opacity: 1 !important;
-  filter: none !important;
-  image-rendering: auto;
-  image-rendering: crisp-edges;
-  -webkit-font-smoothing: antialiased;
-  transform: translateZ(0);
-  backface-visibility: hidden;
+    /* width: 123%; */
+    height: 100%;
+    /* max-width: 100%; */
+    max-height: 100%;
+    /* object-fit: contain; */
+    /* display: block; */
+    /* will-change: auto; */
+    /* border-radius: 12px; */
+    /* opacity: 1 !important; */
+    /* filter: none !important; */
+    image-rendering: auto;
+    /* image-rendering: crisp-edges; */
+    /* -webkit-font-smoothing: antialiased; */
+    transform: translateZ(0);
+    /* backface-visibility: hidden; */
 }
 
-/* ─── Responsive ─── */
+/* ─── Reveal sticky responsive heights ─── */
+@media (max-width: 992px) {
+  .reveal-sticky {
+    height: 580px;
+    top: calc((100vh - 580px) / 2);
+  }
+}
+
 @media (max-width: 767px) {
-  .reveal-panel {
-    padding: 20px;
+  .reveal-sticky {
+    height: 620px;
+    top: calc((100vh - 620px) / 2);
   }
 
-  .reveal-panel img {
-    max-height: 80vh;
+  .reveal-panel {
+    padding: 0;
   }
 }
 
@@ -2316,7 +2348,7 @@ span#typed-text {
   background: var(--bg)
 }
 
-.pricing-h2 {font-weight: 400;font-size: clamp(28px, 5vw, 83px);color: var(--primary);letter-spacing: -3px;margin-bottom: 16px;}
+.pricing-h2 {font-weight: 400;font-size: clamp(28px, 5vw, 83px);color: var(--primary);letter-spacing: 0px;margin-bottom: 16px;}
 
 .pricing-sub {
   font-size: clamp(14px, 1.6vw, 22px);
@@ -2596,15 +2628,47 @@ span#typed-text {
   opacity: 0;
   transform: translateY(36px)
 }
+.sp-bg-num2 {
+    position: absolute;
+    top: -65px;
+    left: 22rem;
+    font-size: 247px;
+    font-weight: 900;
+    line-height: 1;
+    color: #faf7f4;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -5px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
 
 @media(max-width:1367px) {
   .wcard-title {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 22px;
     color: var(--primary);
     margin-bottom: 14px;
     line-height: 1.3;
   }
+
+  .sp-bg-num2 {
+    position: absolute;
+    top: -43px;
+    left: 16rem;
+    font-size: 247px;
+    font-weight: 900;
+    line-height: 1;
+    color: #faf7f4;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -5px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+
 
   .hero-email-wrap {
     position: relative;
@@ -2634,7 +2698,7 @@ span#typed-text {
 
   .hero-h1 {
     
-    font-weight: 800;
+    font-weight: 500;
     font-size: clamp(32px, 5vw, 53px);
     color: var(--primary);
     letter-spacing: -2px;
@@ -2648,7 +2712,7 @@ span#typed-text {
     font-weight: 900;
     font-size: clamp(30px, 5.5vw, 60px);
     color: var(--primary);
-    letter-spacing: -3px;
+    letter-spacing: 0px;
     line-height: 1;
     text-transform: capitalize;
     margin-bottom: 16px;
@@ -2656,11 +2720,11 @@ span#typed-text {
 
   .steps-h2 {
     color: var(--primary, #2D3436);
-    font-size: 76.701px;
+    font-size: 68.701px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 80.694px;
-    letter-spacing: -3.821px;
+    letter-spacing: 0px;
   }
 
 }
@@ -2857,5 +2921,346 @@ span#typed-text {
 
   .pricing-cmp {
     flex-direction: column
+  }
+}
+
+/* ══════════════════════════════════════════════
+   STEP PANELS — Unified (Panels 1, 2, 3) — Figma pixel-perfect
+   Source: node 3650:12775 / 3599:7678
+══════════════════════════════════════════════ */
+
+/* ── Shared clip override: white bg, stretch children ── */
+.sp-clip {
+  background: #ffffff;
+  align-items: stretch !important;
+}
+
+/* ── Two-column row: equal-height columns ── */
+.sp-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+}
+
+/* ══ LEFT column ══════════════════════════════ */
+.sp-left {
+  flex: 0 0 49%;
+  /* width: 49%; */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 64px 48px 64px 60px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* Ghost step number — Figma: 247.938px, #faf7f4, top -82px, left -45px */
+.sp-bg-num {
+  position: absolute;
+  top: -65px;
+  left: -36px;
+  font-size: 247px;
+  font-weight: 900;
+  line-height: 1;
+  color: #faf7f4;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -5px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* Inner content stack — gap 20.797px from Figma */
+.sp-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 477px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Label — Figma: Inter Regular, 12.132px, #926faf, line-height 1.2 */
+.sp-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  color: #926faf;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Heading — Figma: Cal Sans, 41.595px, tracking 0.4159px, #2d3436 */
+.sp-heading {
+  font-family: "Cal Sans", sans-serif;
+  font-size: 41px;
+  font-weight: 400;
+  font-style: normal;
+  color: #2d3436;
+  line-height: normal;
+  letter-spacing: 0.42px;
+  margin: 0;
+}
+
+/* Description — Figma: Inter Regular, 19.064px, #6b6560 */
+.sp-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  font-weight: 400;
+  font-style: normal;
+  color: #6b6560;
+  line-height: normal;
+  margin: 0;
+}
+
+/* Italic secondary desc (panel 1 only) */
+.sp-desc-italic {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  color: #6b6560;
+  line-height: normal;
+  margin: 0;
+}
+
+/* Tags row — Figma: gap 9.532px */
+.sp-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Base pill — Figma: Inter Regular, 12.132px, px 8.666px py 6.932px, r 25.997px */
+.sp-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  padding: 7px 9px;
+  border-radius: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* Green pill — Figma: bg #efffed, border rgba(97,196,84,.21), text #61c454 */
+.sp-tag-green {
+ color: #926FAF;
+    border-radius: 25.997px;
+    border: 0.867px solid rgba(146, 111, 175, 0.30);
+    background: #F8EFFF;
+}
+
+/* Gold pill — Figma: bg #fffcf6, border rgba(255,208,121,.31), text #e8ac50 */
+.sp-tag-gold {
+  background: #fffcf6;
+  border: 1px solid rgba(255, 208, 121, 0.31);
+  color: #e8ac50;
+}
+
+/* Purple pill — sbadge-purple equivalent */
+.sp-tag-purple {
+  background: #f8efff;
+  border: 1px solid rgba(146, 111, 175, 0.3);
+  color: #926faf;
+}
+
+
+/* ══ RIGHT column ══════════════════════════════ */
+.sp-right {
+  flex: 1 1 0;
+  overflow: hidden;
+  /* background: #fdf7f2; */
+  position: relative;
+}
+
+/* Default: cover image fills the right column */
+.sp-right img,
+.sp-right video {
+  width: 100%;
+  /* height: 100%; */
+  display: block;
+  object-fit: cover;
+}
+
+/* Panel 1 — g1.png: text on left half, chat UI on right half → show right */
+.sp-img-right {
+  object-position: right center;
+}
+
+/* Panel 2 — g2.png: chapter cards on left half, text on right half → show left */
+.sp-img-left {
+  object-position: left center;
+}
+
+/* Panel 3 — gif: contained, floated from top like Figma card (top: 21px) */
+.sp-right-gif {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 21px;
+}
+
+.sp-right-gif img {
+  /* width: 100%;
+  height: calc(100% - 21px); */
+  /* object-fit: contain; */
+  /* object-position: top center; */
+  border-radius: 17px 17px 0 0;
+  /* display: block; */
+  width: 100%;
+}
+
+/* ── Tablet ≤ 992px ────────────────────────── */
+@media (max-width: 992px) {
+  .sp-left {
+    padding: 40px 32px 40px 40px;
+  }
+
+  .sp-bg-num {
+    font-size: 180px;
+    top: -48px;
+    left: -28px;
+  }
+
+  .sp-heading {
+    font-size: 32px;
+  }
+
+  .sp-desc {
+    font-size: 16px;
+  }
+
+  .sp-desc-italic {
+    font-size: 14px;
+  }
+}
+
+/* ── Mobile ≤ 767px: stack vertically ──────── */
+@media (max-width: 767px) {
+  .sp-row {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .sp-left {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    padding: 52px 24px 24px;
+  }
+
+  .sp-inner {
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  .sp-bg-num {
+    font-size: 140px;
+    top: -44px;
+    left: -24px;
+  }
+
+  .sp-heading {
+    font-size: 28px;
+  }
+
+  .sp-desc {
+    font-size: 15px;
+  }
+
+  .sp-right {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 220px;
+  }
+
+  .sp-right video {
+    height: 100%;
+    width: 100%;
+  }
+
+  .sp-right-gif {
+    padding-top: 0;
+    height: 220px;
+  }
+
+  .sp-right-gif img,
+  .sp-right-gif video {
+    height: 100%;
+    border-radius: 0;
+  }
+}
+
+/* ── Small mobile ≤ 480px ───────────────────── */
+@media (max-width: 480px) {
+  .sp-left {
+    padding: 44px 18px 20px;
+  }
+
+      .steps-sec, .speak-sec, .testi-sec, .pricing-sec {
+        padding: 32px 0;
+        padding-bottom: 60px;
+    }
+
+    .speak-card {
+    /* display: inline-flex; */
+    align-items: center;
+    gap: 22px;
+    height: auto;
+    border-radius: 21px;
+    padding: 21px;
+    border-radius: 21.446px;
+    border: 0.894px solid #DADADA;
+    background: var(--surface, #FFF);
+    box-shadow: 349.399px 252.89px 120.637px 0 rgba(0, 0, 0, 0.00), 223.401px 161.742px 109.913px 0 rgba(0, 0, 0, 0.01), 125.998px 91.148px 92.935px 0 rgba(0, 0, 0, 0.05), 56.297px 40.212px 68.807px 0 rgba(0, 0, 0, 0.09), 14.298px 9.83px 37.531px 0 rgba(0, 0, 0, 0.10);
+}
+
+
+  .text-cta {
+   
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+
+  .testi-track-outer::after {
+    right: 0;
+    background: transparent;
+}
+
+  .testi-track-outer::before {
+    left: 0;
+    background: transparent;
+}
+
+  .sp-bg-num {
+    font-size: 110px;
+    top: -32px;
+    left: -18px;
+  }
+
+  .sp-heading {
+    font-size: 24px;
+  }
+
+  .sp-desc {
+    font-size: 14px;
+  }
+
+  .sp-desc-italic {
+    font-size: 13px;
+  }
+
+  .sp-tag {
+    font-size: 11px;
+    padding: 6px 8px;
   }
 }

@@ -340,22 +340,25 @@ p {
 
 .qs-item-q {
 
-  color: var(--text, #2D3436);
+color: var(--text, #2D3436);
 
-  font-size: 18.186px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 160%;
+font-size: 18.186px;
+
+font-style: normal;
+
+font-weight: 400;
+
+line-height: 160%;
   /* 32.297px */
 }
 
 .qs-item-desc {
   color: var(--text-2, #6B6560);
-
   font-size: 19.809px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  font-family: Inter !important;
 }
 
 /* ── Tags ── */
@@ -505,9 +508,9 @@ p {
 
   .h1-black {
     color: var(--primary, #2D3436);
-    font-size: 59.945px;
+    font-size: 44.945px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 1.4;
   }
 

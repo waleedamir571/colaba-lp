@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Logo Test</title>
+    <style>
+        body {
+            background: #faf7f4;
+            padding: 50px;
+            font-family: Arial, sans-serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2d3436; margin-bottom: 30px; }
+        h2 { color: #926faf; margin: 20px 0 10px; font-size: 18px; }
+        video, img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border: 2px solid #e8ac50;
+            border-radius: 8px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎬 Video Logo Test Page</h1>
+        
+        <h2>Test 1: MOV Format Only</h2>
+        <video autoplay loop muted playsinline>
+            <source src="assets/images/logo.mov" type="video/quicktime">
+        </video>
+        <div class="status info" id="status1">Testing...</div>
+        
+        <h2>Test 2: Multiple Formats (with fallback)</h2>
+        <video autoplay loop muted playsinline>
+            <source src="assets/images/logo.mp4" type="video/mp4">
+            <source src="assets/images/logo.webm" type="video/webm">
+            <source src="assets/images/logo.mov" type="video/quicktime">
+            <img src="assets/images/black.gif" alt="Fallback">
+        </video>
+        <div class="status info" id="status2">Testing...</div>
+        
+        <h2>Test 3: GIF Fallback (Should Always Work)</h2>
+        <img src="assets/images/black.gif" alt="GIF Logo">
+        <div class="status success">✅ GIF fallback working</div>
+        
+        <h2>Browser Support Info</h2>
+        <div class="status info" id="browserInfo">Checking browser support...</div>
+    </div>
+
+    <script>
+        // Test 1
+        const video1 = document.querySelectorAll('video')[0];
+        video1.addEventListener('loadeddata', () => {
+            document.getElementById('status1').textContent = '✅ MOV video loaded successfully!';
+            document.getElementById('status1').className = 'status success';
+        });
+        video1.addEventListener('error', () => {
+            document.getElementById('status1').textContent = '❌ MOV format not supported in this browser';
+            document.getElementById('status1').className = 'status error';
+        });
+
+        // Test 2
+        const video2 = document.querySelectorAll('video')[1];
+        video2.addEventListener('loadeddata', () => {
+            document.getElementById('status2').textContent = '✅ Video loaded! Format: ' + (video2.currentSrc.split('.').pop());
+            document.getElementById('status2').className = 'status success';
+        });
+        video2.addEventListener('error', () => {
+            document.getElementById('status2').textContent = '⚠️ Video failed, showing GIF fallback';
+            document.getElementById('status2').className = 'status error';
+        });
+
+        // Browser info
+        const browserInfo = document.getElementById('browserInfo');
+        const video = document.createElement('video');
+        const formats = {
+            'video/mp4': 'MP4',
+            'video/webm': 'WebM',
+            'video/quicktime': 'MOV'
+        };
+        
+        let supported = [];
+        for (let [type, name] of Object.entries(formats)) {
+            if (video.canPlayType(type)) {
+                supported.push(name);
+            }
+        }
+        
+        browserInfo.textContent = 'Browser: ' + navigator.userAgent.split(' ').pop() + 
+            ' | Supported formats: ' + (supported.length ? supported.join(', ') : 'None detected');
+    </script>
+</body>
+</html>

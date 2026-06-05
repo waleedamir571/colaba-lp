@@ -210,34 +210,76 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <section class="reveal-section" id="reveal-section">
-            <div class="reveal-sticky" id="reveal-sticky">
-
-              <div class="reveal-stage">
-
-                <!-- Panel 1 -->
-                <div class="reveal-panel" id="rp-1">
-                  <div class="reveal-clip">
-                    <img src="assets/images/g1.png" alt="Step 1">
+          <!-- Panel 1: Have A Conversation -->
+          <section class="step-block" id="rp-1">
+            <div class="sp-clip">
+              <div class="sp-row">
+                <div class="sp-left" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" data-aos-once="false">
+                  <span class="sp-bg-num" aria-hidden="true">01</span>
+                  <div class="sp-inner">
+                    <p class="sp-label">15 Minutes</p>
+                    <h2 class="sp-heading">Have A Conversation</h2>
+                    <p class="sp-desc">Colaba asks empathetic questions about your story, your
+                      reader, and your message.</p>
+                    <div class="sp-tags">
+                      <span class="sp-tag sp-tag-gold">Voice or Text</span>
+                      <span class="sp-tag sp-tag-green">Guided Questions</span>
+                    </div>
                   </div>
                 </div>
-
-                <!-- Panel 2 -->
-                <div class="reveal-panel" id="rp-2">
-                  <div class="reveal-clip">
-                    <img src="assets/images/g2.png" alt="Step 2">
-                  </div>
+                <div class="sp-right">
+                  <video class="sp-img-right step-video" src="assets/images/Chat.mp4" muted playsinline data-step="1"></video>
                 </div>
-
-                <!-- Panel 3 -->
-                <div class="reveal-panel" id="rp-3">
-                  <div class="reveal-clip">
-                    <img src="assets/images/g3.png" alt="Step 3">
-                  </div>
-                </div>
-
               </div>
+            </div>
+          </section>
 
+          <!-- Panel 2: Get Your Outline -->
+          <section class="step-block" id="rp-2">
+            <div class="sp-clip">
+              <div class="sp-row">
+                <div class="sp-right sp-right-gif">
+                   <video class="sp-img-right step-video" src="assets/images/2.mp4" muted playsinline data-step="2"></video>
+                </div>
+                <div class="sp-left" data-aos="fade-left" data-aos-duration="800" data-aos-delay="100" data-aos-once="false">
+                  <span class="sp-bg-num2" aria-hidden="true">02</span>
+                  <div class="sp-inner">
+                    <p class="sp-label">Instant</p>
+                    <h2 class="sp-heading">Get Your Outline</h2>
+                    <p class="sp-desc">Colaba transforms your conversation into a structured
+                      chapter-by-chapter outline. Drag to reorder, click to edit,
+                      or tell Colaba what to change.</p>
+                    <div class="sp-tags">
+                      <span class="sp-tag sp-tag-green">Editable</span>
+                      <span class="sp-tag sp-tag-gold">Custom Structure</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Panel 3: Read Your Chapter -->
+          <section class="step-block" id="rp-3">
+            <div class="sp-clip">
+              <div class="sp-row">
+                <div class="sp-left" data-aos="fade-right" data-aos-duration="800" data-aos-delay="100" data-aos-once="false">
+                  <span class="sp-bg-num" aria-hidden="true">03</span>
+                  <div class="sp-inner">
+                    <p class="sp-label">10 Min Per Chapter</p>
+                    <h2 class="sp-heading">Read Your Chapter</h2>
+                    <p class="sp-desc">Colaba writes each chapter in your voice, using your stories and turning
+                      points. Revise with voice or text until it sounds exactly like you.</p>
+                    <div class="sp-tags">
+                      <span class="sp-tag sp-tag-green">Your Voice</span>
+                      <span class="sp-tag sp-tag-gold">Unlimited Revisions</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="sp-right sp-right-gif">
+                   <video class="sp-img-right step-video" src="assets/images/3.mp4" muted playsinline data-step="3"></video>
+                </div>
+              </div>
             </div>
           </section>
         </div>
@@ -367,17 +409,16 @@
 <!-- ================================================
   PRICING  (exact dark Figma panel)
 ================================================ -->
-<section class="pricing-sec" id="pricing">
+<!-- <section class="pricing-sec" id="pricing">
   <div class="container">
     <div class="pricing-head text-center">
       <h2 class="pricing-h2">Starting at <span class="text-cta">$26/month</span></h2>
       <p class="pricing-sub">That's less than <span class="text-purple">a coffee a day</span> for your life
         story.</p>
     </div>
-    <!-- Dark panel -->
+   
     <div class="pricing-dark">
-      <!-- <img class="w-100" src="assets/images/full.png" alt=""> -->
-      <!-- compare row -->
+     
       <div class="pricing-cmp">
         <div class="pcol">
           <span class="pc-lbl" id="pc-lbl">Ghostwriter</span>
@@ -421,7 +462,7 @@
         <img src="assets/images/morining.png" alt="Colaba dashboard" class="pricing-browser-img" />
       </div>
     </div>
-    <!-- CTA row -->
+    
     <div class="pricing-cta-row text-center">
       <a href="#waitlist" class="btn-orange">Join the waitlist</a>
       <button class="btn-white">
@@ -434,7 +475,7 @@
       </button>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ================================================
   FOOTER  (exact Figma)

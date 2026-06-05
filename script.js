@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
     duration: 800,
     easing: 'ease-out-cubic',
     once: false,
-    offset: 50,
+    offset: 200, // Section 200px viewport mein aane ke baad animate ho
     delay: 0,
-    disable: false
+    disable: false,
+    startEvent: 'load' // Page load hone ke baad start
   });
   AOS.refresh();
 });
@@ -94,14 +95,14 @@ gsap.to('#hf-r2',   { y: -7,  duration: 3.8, repeat: -1, yoyo: true, ease: 'sine
    3. TYPING ANIMATION - Hero + text-cta elements
 ────────────────────────────────────────────────── */
 
-// Hero typing animation
+// Hero typing animation - scroll-triggered, runs once like .text-cta elements
 const HEADING = "Your story deserves to be a book";
-let charI = 0;
-let isDeleting = false;
 
-function typeNext() {
-    if (!isDeleting) {
-        // Typing forward
+function createHeroTypeAnimation(initialDelay = 0) {
+    let charI = 0;
+
+    function typeNext() {
+        // Typing forward only - no deleting, no loop
         if (charI <= HEADING.length) {
             let text = HEADING.substring(0, charI);
             // Sirf "book" word ko yellow karo
@@ -110,76 +111,64 @@ function typeNext() {
             charI++;
             const delay = charI < 6 ? 110 : charI < 18 ? 72 : 48;
             setTimeout(typeNext, delay);
-        } else {
-            // Wait at end, then start deleting
-            setTimeout(() => {
-                isDeleting = true;
-                $('#type-cursor').css('opacity', 1);
-                typeNext();
-            }, 2000);
         }
-    } else {
-        // Deleting backward
-        if (charI >= 0) {
-            let text = HEADING.substring(0, charI);
-            text = text.replace(/book$/, '<span class="yellow">book</span>');
-            $('#typed-text').html(text);
-            charI--;
-            setTimeout(typeNext, 35);
-        } else {
-            // Reset and start typing again
-            isDeleting = false;
-            charI = 0;
-            setTimeout(typeNext, 500);
-        }
+        // Animation complete - stops here, no repeat
     }
+    
+    setTimeout(typeNext, initialDelay);
 }
-setTimeout(typeNext, 1000);
 
-// Typing animation for all .text-cta elements
-function createTypeAnimation($element, initialDelay = 0) {
-    const originalText = $element.text().trim();
-    if (!originalText) return;
-    
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function animateType() {
-        if (!isDeleting) {
-            // Typing forward
-            if (charIndex <= originalText.length) {
-                $element.text(originalText.substring(0, charIndex));
-                charIndex++;
-                const delay = charIndex < 6 ? 110 : charIndex < 20 ? 72 : 48;
-                setTimeout(animateType, delay);
-            } else {
-                // Wait at end, then start deleting
-                setTimeout(() => {
-                    isDeleting = true;
-                    animateType();
-                }, 2500);
-            }
-        } else {
-            // Deleting backward
-            if (charIndex >= 0) {
-                $element.text(originalText.substring(0, charIndex));
-                charIndex--;
-                setTimeout(animateType, 35);
-            } else {
-                // Reset and start typing again
-                isDeleting = false;
-                charIndex = 0;
-                setTimeout(animateType, 500);
-            }
+// Scroll-triggered hero typing animation
+const heroTypedEl = document.getElementById('typed-text');
+if (heroTypedEl) {
+    gsap.to(heroTypedEl, {
+        scrollTrigger: {
+            trigger: '.hero-section',
+            start: 'top 80%',
+            onEnter: () => {
+                // Only start animation once
+                if (!heroTypedEl.dataset.animated) {
+                    heroTypedEl.dataset.animated = 'true';
+                    createHeroTypeAnimation(300);
+                }
+            },
+            once: true
         }
+    });
+}
+
+// Typing animation for all .text-cta elements (plays once and stops)
+function createTypeAnimation($element, initialDelay = 0) {
+    // Read from data-original-text (saved before clearing on page load)
+    const originalText = $element.attr('data-original-text') || $element.text().trim();
+    if (!originalText) return;
+
+    let charIndex = 0;
+
+    function animateType() {
+        // Typing forward only
+        if (charIndex <= originalText.length) {
+            $element.text(originalText.substring(0, charIndex));
+            charIndex++;
+            const delay = charIndex < 6 ? 110 : charIndex < 20 ? 72 : 48;
+            setTimeout(animateType, delay);
+        }
+        // Animation complete - stops here, no deleting, no repeat
     }
-    
+
     // Start animation after initial delay
     setTimeout(animateType, initialDelay);
 }
 
 // Apply typing animation to all .text-cta elements when they come into view
 document.querySelectorAll('.text-cta').forEach((el, index) => {
+    // Save original text and clear immediately so it's not visible before scroll
+    const text = el.textContent.trim();
+    if (text) {
+        el.dataset.originalText = text;
+        el.textContent = '';
+    }
+
     gsap.to(el, {
         scrollTrigger: {
             trigger: el,
@@ -224,6 +213,8 @@ gsap.utils.toArray('.wcard').forEach((card, i) => {
   gsap.registerPlugin(ScrollTrigger);
 
   const section  = document.getElementById('reveal-section');
+  if (!section) return; /* Sticky scroll disabled — panels are now separate sections */
+
   const panels   = gsap.utils.toArray('.reveal-panel');
   const clips    = gsap.utils.toArray('.reveal-clip');
   const imgs     = gsap.utils.toArray('.reveal-panel img');
@@ -594,6 +585,22 @@ $('.speak-card').on('click', function(){
     .to('.speak-voice-img', { scale: 1, duration: 0.4, ease: 'elastic.out(1,.5)' });
 });
 
+/* ──────────────────────────────────────────────────
+   VIDEO LOGO DEBUG - Check if video is loading
+────────────────────────────────────────────────── */
+(function() {
+  const videoLogo = document.querySelector('.nav-logo-img');
+  if (videoLogo && videoLogo.tagName === 'VIDEO') {
+    videoLogo.addEventListener('loadeddata', function() {
+      console.log('✅ Video logo loaded successfully');
+    });
+    videoLogo.addEventListener('error', function(e) {
+      console.error('❌ Video logo failed to load:', e);
+      console.log('Trying format:', this.currentSrc || 'no source');
+    });
+  }
+})();
+
 (function() {
     window.addEventListener('DOMContentLoaded', function() {
       gsap.registerPlugin(ScrollTrigger);
@@ -782,3 +789,73 @@ $('.speak-card').on('click', function(){
       console.warn("GSAP not loaded — animation will not run.");
     }
   })();
+
+
+/* ──────────────────────────────────────────────────
+   VIDEO SCROLL CONTROL - Play video only for visible section
+   Jis section par ho sirf wahi video chale, baaki sab pause
+────────────────────────────────────────────────── */
+(function() {
+  // Get all step videos
+  const stepVideos = document.querySelectorAll('.step-video');
+  
+  if (!stepVideos.length) return;
+
+  // Track which videos have played completely (ek baar puri chal chuki hai)
+  const completedVideos = new Set();
+
+  // Add event listener to track when video completes
+  stepVideos.forEach(video => {
+    video.addEventListener('ended', function() {
+      completedVideos.add(this.dataset.step);
+      console.log(`✅ Video ${this.dataset.step} completed`);
+    });
+  });
+
+  // Create Intersection Observer
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      const stepNumber = video.dataset.step;
+
+      // When video section enters viewport
+      if (entry.isIntersecting) {
+        // Stop all other videos first
+        stepVideos.forEach(v => {
+          if (v !== video && !v.paused) {
+            v.pause();
+            console.log(`⏸️ Video ${v.dataset.step} paused`);
+          }
+        });
+
+        // Play current video only if not completed
+        if (!completedVideos.has(stepNumber)) {
+          video.loop = false; // No loop
+          video.play()
+            .then(() => {
+              console.log(`▶️ Video ${stepNumber} playing`);
+            })
+            .catch(err => console.log('Video play error:', err));
+        } else {
+          console.log(`⏭️ Video ${stepNumber} already played, skipping`);
+        }
+      } else {
+        // When section leaves viewport, pause the video
+        if (!video.paused) {
+          video.pause();
+          console.log(`⏸️ Video ${stepNumber} paused (out of view)`);
+        }
+      }
+    });
+  }, {
+    threshold: 0.5, // 50% of section must be visible
+    rootMargin: '0px'
+  });
+
+  // Observe all step videos
+  stepVideos.forEach(video => {
+    videoObserver.observe(video);
+  });
+
+  console.log('🎬 Video scroll control initialized - one video at a time, plays once only');
+})();
