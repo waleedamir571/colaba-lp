@@ -51,6 +51,7 @@ a {
     position: relative;
     width: 100%;
     overflow: hidden;
+    padding: 0 12px 0 0;
     /* height injected by JS */
 }
 
@@ -346,13 +347,14 @@ a {
 ═══════════════════════════════════════════ */
 .cleo-hero-inner {
     position: relative;
-    width: 86%;
+    width: 1640px;
     height: 100vh;
     transform-origin: top left;
     border-radius: 32px;
     background: url(../images/cleo/bg-image.png) lightgray 0.334px -239.4px / 100% 135.4% no-repeat;
-    margin-left: 12px;
-    margin-top: 10px;
+    margin: 10px 0 0 12px;
+    background-size: 100% 114%;
+    background-color: transparent;
 }
 
 
@@ -535,9 +537,9 @@ a {
 .mktg-badge {
     position: absolute;
     left: 925px;
-    top: 236px;
+    top: 315px;
 
-    font-family: 'Lato', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
     font-size: 11.5px;
     font-weight: 700;
     font-style: italic;
@@ -1089,10 +1091,21 @@ em {
     line-height: 1.3;
 }
 
+p.ca-disc {
+    color: rgba(64, 64, 64, 0.70);
+    text-align: center;
+    font-family: Lato;
+    font-size: 9.931px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-top: 10px;
+}
+
 .fiction1 {
     position: absolute;
-    left: 50rem;
-    bottom: -66rem;
+    left: 46rem;
+    bottom: -65rem;
 }
 
 .tcard-text {
@@ -1245,10 +1258,9 @@ em {
 
 /* Tag 1 "Haunted by the blank page" — left:186/1728=10.76%, top:112/1728=6.48vw */
 .fn-tag-1 {
-    left: 0.76%;
+    left: -3.24%;
     top: 10.48vw;
     width: auto;
-    /* transform handled by GSAP */
 }
 
 /* Tag 2 "Marketing blurbs are the worst" */
@@ -1302,7 +1314,7 @@ em {
     .fiction1 {
         position: absolute;
         left: 32rem;
-        bottom: -52rem;
+        bottom: -58rem;
     }
 
     .fn-tag-3 {
@@ -1329,7 +1341,7 @@ em {
     .fiction {
         position: absolute;
         left: 23rem;
-        top: 48rem;
+        top: 54rem;
     }
 
     .tcard-title {
@@ -1349,16 +1361,77 @@ em {
         z-index: 999999;
         pointer-events: none;
     }
+}
 
+/* Tablet responsiveness */
+@media (max-width: 991px) {
+    .cleo-hero {
+        padding: 0 8px 0 0;
+    }
+    
     .cleo-hero-inner {
-        position: relative;
-        width: 120%;
-        height: 100vh;
-        transform-origin: top left;
-        border-radius: 32px;
-        background: url(../images/cleo/bg-image.png) lightgray 0.334px -239.4px / 100% 135.4% no-repeat;
-        margin-left: 12px;
-        margin-top: 10px;
+        border-radius: 20px;
+        margin: 8px 0 0 8px;
+    }
+    
+    .hero-heading {
+        font-size: clamp(40px, 8vw, 60px);
+    }
+    
+    .hero-center {
+        width: 90%;
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .cleo-hero {
+        padding: 0 5px 0 0;
+    }
+    
+    .cleo-hero-inner {
+        border-radius: 16px;
+        margin: 5px 0 0 5px;
+    }
+    
+    .cleo-nav {
+        top: 20px;
+        left: 20px;
+    }
+    
+    .cleo-logo {
+        height: 35px;
+    }
+    
+    .hero-center {
+        width: 95%;
+        gap: 8px;
+    }
+    
+    .hero-heading {
+        font-size: clamp(32px, 10vw, 50px);
+    }
+    
+    .hero-btns {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-try, .btn-demo {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .purple-button {
+        width: auto;
+        min-width: 60%;
+    }
+    
+    /* Hide or minimize cards on mobile */
+    .c-card {
+        transform: scale(0.85);
     }
 }
 
@@ -1417,7 +1490,7 @@ em {
     display: flex;
     flex-direction: column;
     max-width: 92%;
-     border-radius: 0 14.432px 14.432px 14.432px;
+    border-radius: 0 14.432px 14.432px 14.432px;
 }
 
 .ca-ai-text {
@@ -1427,7 +1500,7 @@ em {
     border-radius: 0 14.432px 14.432px 14.432px;
     background: #FFF;
     padding: 16px 12px;
-     font-weight: 400;
+    font-weight: 400;
     /* border-radius: 0 14.432px 14.432px 14.432px; */
 }
 
@@ -1479,11 +1552,13 @@ em {
 }
 
 .ca-opt {
+    border-radius: 27.06px;
+    border: 0.902px solid rgba(255, 208, 121, 0.31);
+    background: #FFF;
+    box-shadow: 0 1.804px 12.899px 0 #FAFAFA;
     font-size: 12px;
     color: #404040;
-    background: #fff;
-    border: 0.9px solid rgba(255, 208, 121, 0.31);
-    border-radius: 14.716px;
+   
     padding: 6px 15px;
     box-shadow: 0 1.8px 12.9px 0 rgba(250, 250, 250, 1);
     opacity: 0;
@@ -1557,8 +1632,10 @@ em {
     background: #F8F8F8;
     border: 0.83px solid #E4E4E4;
     border-radius: 9px;
-    padding: 4px;
+    padding: 10px;
     gap: 6px;
+    border-radius: 9.103px;
+    background: #FFF;
 }
 
 /* Yellow square "+" icon — SVG: #FFD079 fill-opacity 0.2, rx=5.79 */
@@ -1577,6 +1654,14 @@ em {
     flex: 1;
     font-size: 13px;
     color: #AAAAAA;
+    overflow: hidden;
+    color: rgba(64, 64, 64, 0.60);
+    text-overflow: ellipsis;
+    font-family: Lato;
+    font-size: 11.931px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .ca-input-right {
@@ -1611,7 +1696,7 @@ em {
    320px - 576px (Mobile Devices)
 ═══════════════════════════════════════════ */
 @media (min-width: 320px) and (max-width: 576px) {
-    
+
     /* Base Typography & Spacing */
     body {
         font-size: 14px;
@@ -1619,13 +1704,13 @@ em {
     }
 
     /* Hero Section */
-        .cleo-hero {
+    .cleo-hero {
         min-height: 60vh;
         height: auto;
         background-size: 100% 100%;
     }
 
-        .cleo-hero-inner {
+    .cleo-hero-inner {
         width: 100%;
         height: auto;
         /* min-height: 600px; */
@@ -1768,6 +1853,7 @@ em {
         margin-left: 60px;
         transform: none !important;
     }
+
     /* Comparison Section */
     .why-comp-row {
         margin-top: 30px;
@@ -2066,7 +2152,7 @@ em {
         margin-right: -10px;
     }
 
-    .row > * {
+    .row>* {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -2081,7 +2167,10 @@ em {
     }
 
     /* Animations - Reduce for Performance */
-       .anim-from-top, .anim-from-left, .anim-from-right, .anim-from-bottom {
+    .anim-from-top,
+    .anim-from-left,
+    .anim-from-right,
+    .anim-from-bottom {
         animation-duration: 0.5s !important;
         width: 50%;
     }
@@ -2089,9 +2178,18 @@ em {
 
     /* Hide Complex Elements on Mobile */
     .hero-center .c-card,
-    .card-1, .card-2, .card-3, .card-4,
-    .card-5, .card-6, .card-7, .card-8,
-    .card-9, .card-10, .card-11, .card-12 {
+    .card-1,
+    .card-2,
+    .card-3,
+    .card-4,
+    .card-5,
+    .card-6,
+    .card-7,
+    .card-8,
+    .card-9,
+    .card-10,
+    .card-11,
+    .card-12 {
         display: none !important;
     }
 
@@ -2110,47 +2208,47 @@ em {
         min-width: 44px;
     }
 
-.ca-send-btn {
-    width: 36px;
-    height: 28px;
-    background: #FEBD43;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    .ca-send-btn {
+        width: 36px;
+        height: 28px;
+        background: #FEBD43;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .ca-disc {
+        font-size: 10px;
+        color: #BBBBBB;
+        text-align: center;
+        margin: 8px 0 0;
+    }
+
+    /* Score column (right side — separate Figma layer) */
+    .ca-score-col {
+        width: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 14px;
+        flex-shrink: 0;
+    }
+
+    .ca-score-badge {
+        background: #E85D4A;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 5px 10px;
+        border-radius: 20px;
+        letter-spacing: 0.02em;
+        font-family: 'Inter', sans-serif;
+    }
 }
 
-.ca-disc {
-    font-size: 10px;
-    color: #BBBBBB;
-    text-align: center;
-    margin: 8px 0 0;
-}
-
-/* Score column (right side — separate Figma layer) */
-.ca-score-col {
-    width: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 14px;
-    flex-shrink: 0;
-}
-
-.ca-score-badge {
-    background: #E85D4A;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 20px;
-    letter-spacing: 0.02em;
-    font-family: 'Inter', sans-serif;
-}
-}
-
-@media  (min-width: 320px) and (max-width: 576px) {
+@media (min-width: 320px) and (max-width: 576px) {
     .ca-wrap {
         min-height: 400px;
     }

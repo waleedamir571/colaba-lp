@@ -6,10 +6,11 @@
 
     /* ─── Scale hero to fill viewport width ─── */
     function scaleHero() {
-        var scale = window.innerWidth / 1675;
+        var designWidth = 1675;
+        var scale = window.innerWidth / designWidth;
         heroInner.style.transform       = 'scale(' + scale + ')';
         heroInner.style.transformOrigin = 'top left';
-        heroWrap.style.height           = Math.round(window.innerHeight * scale) + 'px';
+        // heroWrap.style.height           = Math.round(928 * scale) + 'px';
     }
 
     scaleHero();
@@ -122,14 +123,17 @@
     var els = document.querySelectorAll('.text-cta, .text-cta1, .text-cta2');
 
     els.forEach(function (el) {
-        /* store original text immediately so it survives any clear */
+        /* Store original text and clear immediately */
         el.dataset.original = el.textContent.trim();
-
+        
         if (isInViewport(el)) {
-            /* already visible (hero) — type after short delay */
+            /* Already visible (hero) — clear text, then type after delay */
+            el.textContent = '';
             setTimeout(function () { typeElement(el); }, 400);
         } else {
-            /* below fold — use IntersectionObserver */
+            /* Below fold — clear text immediately, type when visible */
+            el.textContent = '';
+            
             var obs = new IntersectionObserver(function (entries, observer) {
                 entries.forEach(function (entry) {
                     if (entry.isIntersecting) {

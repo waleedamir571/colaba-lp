@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400;1,700&family=Inter:ital,wght@0,400;0,500;0,600;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap"
         rel="stylesheet">
@@ -1373,32 +1374,32 @@
                     ease: 'power2.out', delay: 0.8 + paras.length * 0.13 + 0.08
                 });
 
-                /* Person illustration — slides up from below */
+                /* Person illustration — slides up LATER (after text starts) */
                 gsap.to('#fnPerson', {
                     y: 0, autoAlpha: 1,
                     duration: 1.1,
                     ease: 'power3.out',
-                    delay: 0.18
+                    delay: 2.5  // Much later - after text animations
                 });
 
-                /* Tags — elastic zoom one by one, each settles to a slight tilt */
+                /* Tags — appear even LATER, after person arrives */
                 gsap.to('#fnTag1', {
                     scale: 1, rotation: -6, autoAlpha: 1,
                     duration: 0.9,
                     ease: 'elastic.out(1.1, 0.52)',
-                    delay: 0.7
+                    delay: 3.5  // Later than before
                 });
                 gsap.to('#fnTag2', {
                     scale: 1, rotation: 3, autoAlpha: 1,
                     duration: 0.9,
                     ease: 'elastic.out(1.1, 0.52)',
-                    delay: 1.15
+                    delay: 4.2  // Later than before
                 });
                 gsap.to('#fnTag3', {
                     scale: 1, rotation: -3, autoAlpha: 1,
                     duration: 0.9,
                     ease: 'elastic.out(1.1, 0.52)',
-                    delay: 1.6
+                    delay: 4.9  // Later than before
                 });
             }
 
