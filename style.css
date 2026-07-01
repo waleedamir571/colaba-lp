@@ -1226,6 +1226,11 @@ span#typed-text {
   color: white !important;
 }
 
+/* Hover par purple span bhi white */
+.wcard:hover .purple {
+  color: white !important;
+}
+
 /* Hover par strikethrough line white */
 .wcard:hover .wcard-strikethrough {
   background: white !important;

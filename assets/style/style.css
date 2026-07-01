@@ -109,9 +109,7 @@ a {
     color: var(--muted, #926FAF);
 }
 
-.purple:hover {
-    color: white;
-}
+/* Removed .purple:hover - now handled by .wcard:hover .purple in style.css */
 
 .wcard-light {
     background: white !important;
@@ -199,8 +197,31 @@ a {
     animation: reveal-from-right 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
 }
 
+/* Extra delay for specific marketing badges to prevent early trigger */
+.fiction.anim-from-left,
+.m3.anim-from-right,
+.m4.anim-from-bottom {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fiction.anim-from-left.is-visible {
+    visibility: visible;
+    animation: reveal-from-left 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
+}
+
+.m3.anim-from-right.is-visible {
+    visibility: visible;
+    animation: reveal-from-right 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
+}
+
+.m4.anim-from-bottom.is-visible {
+    visibility: visible;
+    animation: reveal-from-bottom 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.3s forwards;
+}
+
 .anim-from-bottom.is-visible {
-    animation: reveal-from-bottom 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.15s forwards;
+    animation: reveal-from-bottom 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.15s forwards;
 }
 
 .why-h22 {
@@ -223,6 +244,11 @@ a {
     letter-spacing: 1px;
     font-size: 64px;
 }
+
+.why-head2 {
+  margin-bottom: 256px
+}
+
 
 .pt-100 {
     padding-top: 100px;
@@ -334,6 +360,13 @@ a {
     /* letter-spacing: -1.5px; */
     margin-bottom: 16px;
     letter-spacing: 1px;
+}
+
+.last{
+    position: absolute;
+    
+    margin-top: -8rem;
+    margin-left: -3rem;
 }
 
 .fiction {
@@ -1100,6 +1133,7 @@ p.ca-disc {
     font-weight: 400;
     line-height: normal;
     padding-top: 10px;
+    transition: transform 0.4s ease;
 }
 
 .fiction1 {
@@ -1419,7 +1453,7 @@ p.ca-disc {
     
     .btn-try, .btn-demo {
         width: 100%;
-        max-width: 280px;
+        /* max-width: 280px; */
         text-align: center;
         justify-content: center;
     }
@@ -1462,7 +1496,8 @@ p.ca-disc {
 .ca-wrap {
     display: flex;
     width: 100%;
-    min-height: 480px;
+    min-height: 588px;
+    height: 588px;
     background: #FAF7F4;
     font-family: 'Inter', -apple-system, sans-serif;
     overflow: hidden;
@@ -1474,15 +1509,15 @@ p.ca-disc {
     flex-direction: column;
     padding: 22px 20px 16px 20px;
     min-width: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .ca-msgs {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    overflow: hidden;
+    gap: 10px;
+    /* overflow: hidden; */
     padding: 16px 12px;
 }
 
@@ -1530,7 +1565,7 @@ p.ca-disc {
     border: 0.902px solid #FFD079;
     background: rgba(255, 208, 121, 0.11);
     padding: 10px 14px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 400;
     line-height: 1.58;
     max-width: 78%;
@@ -1580,16 +1615,22 @@ p.ca-disc {
 }
 
 .ca-status {
-    display: none;
+    display: flex;
     align-items: center;
     gap: 7px;
     font-size: 11.5px;
     color: #888;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-bottom 0.4s ease, opacity 0.3s ease;
 }
 
 .ca-status.ca-show {
-    display: flex;
+    max-height: 30px;
+    margin-bottom: 10px;
+    opacity: 1;
 }
 
 .ca-dots span {
@@ -1636,6 +1677,7 @@ p.ca-disc {
     gap: 6px;
     border-radius: 9.103px;
     background: #FFF;
+    transition: transform 0.4s ease;
 }
 
 /* Yellow square "+" icon — SVG: #FFD079 fill-opacity 0.2, rx=5.79 */
@@ -1696,6 +1738,10 @@ p.ca-disc {
    320px - 576px (Mobile Devices)
 ═══════════════════════════════════════════ */
 @media (min-width: 320px) and (max-width: 576px) {
+
+    .why-head2 {
+    margin-bottom: 50px;
+}
 
     /* Base Typography & Spacing */
     body {
@@ -1855,8 +1901,9 @@ p.ca-disc {
     }
 
     /* Comparison Section */
-    .why-comp-row {
+       .why-comp-row {
         margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .why-head1 {
@@ -2046,7 +2093,8 @@ p.ca-disc {
 
     /* Chat Animation Widget */
     .ca-wrap {
-        min-height: 400px;
+        min-height: 520px;
+        height: 520px;
     }
 
     .ca-panel {
@@ -2162,6 +2210,11 @@ p.ca-disc {
         color: var(--muted, #926FAF);
     }
 
+    .m4 {
+        margin-left: 60px;
+        transform: none !important;
+        display: none;
+    }
     .bc-sep {
         font-size: 12px;
     }
@@ -2173,6 +2226,8 @@ p.ca-disc {
     .anim-from-bottom {
         animation-duration: 0.5s !important;
         width: 50%;
+                width: 38%;
+        margin-top: -90px;
     }
 
 
@@ -2249,8 +2304,9 @@ p.ca-disc {
 }
 
 @media (min-width: 320px) and (max-width: 576px) {
-    .ca-wrap {
-        min-height: 400px;
+       .ca-wrap {
+        min-height: 500px;
+        height: auto;
     }
 
     .ca-score-col {

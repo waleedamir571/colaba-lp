@@ -98,9 +98,19 @@
         if (el.dataset.cleoTyped) return;
         el.dataset.cleoTyped = 'true';
 
+        // Check if element contains an image
+        var img = el.querySelector('img');
         var original = el.dataset.original || el.textContent.trim();
         el.dataset.original = original;
-        if (!original) return;
+        if (!original && !img) return;
+
+        // If there's an image, preserve it
+        if (img) {
+            var imgHTML = img.outerHTML;
+            el.textContent = '';
+            el.innerHTML = imgHTML; // Keep image, clear text
+            return; // Don't type, just show image
+        }
 
         el.textContent = '';
         var i = 0;
@@ -110,9 +120,27 @@
                 i++;
                 var delay = i < 4 ? 120 : i < 10 ? 80 : 55;
                 setTimeout(tick, delay);
+            } else {
+                // Typing complete - trigger marketing badge if it's nearby
+                el.dataset.typingComplete = 'true';
+                triggerNearbyMarketingBadge(el);
             }
         }
         tick();
+    }
+
+    function triggerNearbyMarketingBadge(textEl) {
+        // Find marketing badge in the same section
+        var section = textEl.closest('.why-head, .why-head1, .why-head2');
+        if (!section) return;
+        
+        var badge = section.querySelector('.fiction, .m3, .m4');
+        if (badge && !badge.classList.contains('is-visible')) {
+            // Delay before showing badge
+            setTimeout(function() {
+                badge.classList.add('is-visible');
+            }, 300);
+        }
     }
 
     function isInViewport(el) {
@@ -123,16 +151,21 @@
     var els = document.querySelectorAll('.text-cta, .text-cta1, .text-cta2');
 
     els.forEach(function (el) {
-        /* Store original text and clear immediately */
+        /* Store original text and check for images */
+        var img = el.querySelector('img');
         el.dataset.original = el.textContent.trim();
         
         if (isInViewport(el)) {
-            /* Already visible (hero) — clear text, then type after delay */
-            el.textContent = '';
+            /* Already visible (hero) — clear text (but preserve image), then type after delay */
+            if (!img) {
+                el.textContent = '';
+            }
             setTimeout(function () { typeElement(el); }, 400);
         } else {
-            /* Below fold — clear text immediately, type when visible */
-            el.textContent = '';
+            /* Below fold — clear text (but preserve image), type when visible */
+            if (!img) {
+                el.textContent = '';
+            }
             
             var obs = new IntersectionObserver(function (entries, observer) {
                 entries.forEach(function (entry) {

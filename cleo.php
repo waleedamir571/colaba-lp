@@ -394,16 +394,16 @@
         </div>
     </section>
     <section class="" id="why">
-        <div class="bg-color pt-100 pb-100">
+        <div class="bg-color pb-100">
             <div class="container">
 
                 <!-- Comparison: Generic AI vs Colaba.ai -->
-                <div class="row why-comp-row g-4 align-items-stretch">
+                <div class="row  g-4 align-items-stretch">
 
                     <!-- ── Left: Generic AI ── -->
                     <div class="col-md-6">
 
-                        <div class="why-head">
+                        <div class="why-head2">
                             <div class="m4 anim-from-bottom">
                                 <img src="assets/images/cleo/marketing4.svg" alt="">
                             </div>
@@ -438,62 +438,8 @@
                         <!-- ── Animated Chat Widget ── -->
                         <div class="ca-wrap" id="caWrap">
                             <div class="ca-panel">
-                                <div class="ca-msgs" id="caMsgs"></div>
-                                <div class="ca-footer">
-                                    <div class="ca-status" id="caStatus">
-                                        <span class="ca-dots"><span></span><span></span><span></span></span>
-                                        <span>AI is incorporating your feedback...</span>
-                                    </div>
-                                    <div class="ca-input-row">
-                                        <!-- Yellow + icon: #FFD079 20% opacity, rx=6 -->
-                                        <span class="ca-input-plus">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path d="M12 5V19" stroke="#8B6914" stroke-width="2"
-                                                    stroke-linecap="round" />
-                                                <path d="M5 12H19" stroke="#8B6914" stroke-width="2"
-                                                    stroke-linecap="round" />
-                                            </svg>
-                                        </span>
-                                        <span class="ca-input-ph">Ask anything...</span>
-                                        <div class="ca-input-right">
-                                            <!-- Mic icon: #404040 50% opacity -->
-                                            <span class="ca-mic-btn">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                                                    viewBox="0 0 16 16" fill="none">
-                                                    <path
-                                                        d="M7.94 14.52C4.61 14.52 1.89 11.8 1.89 8.46V7.22C1.89 6.96 2.1 6.75 2.35 6.75C2.6 6.75 2.81 6.96 2.81 7.22V8.46C2.81 11.29 5.11 13.58 7.94 13.58C10.76 13.58 13.06 11.29 13.06 8.46V7.22C13.06 6.96 13.27 6.75 13.53 6.75C13.78 6.75 13.99 6.96 13.99 7.22V8.46C14 11.8 11.28 14.52 7.94 14.52Z"
-                                                        fill="#404040" fill-opacity="0.5" />
-                                                    <path
-                                                        d="M7.94 1.32C5.72 1.32 3.91 3.14 3.91 5.36V8.47C3.91 10.69 5.72 12.51 7.94 12.51C10.17 12.51 11.98 10.69 11.98 8.47V5.36C11.98 3.14 10.17 1.32 7.94 1.32Z"
-                                                        fill="#404040" fill-opacity="0.5" />
-                                                    <path d="M8 15.5V14" stroke="#404040" stroke-opacity="0.5"
-                                                        stroke-width="0.93" stroke-linecap="round" />
-                                                    <path d="M5.5 15.5H10.5" stroke="#404040" stroke-opacity="0.5"
-                                                        stroke-width="0.93" stroke-linecap="round" />
-                                                </svg>
-                                            </span>
-                                            <!-- Send button: #FEBD43 fill, rounded-rect, waveform+circle icon -->
-                                            <span class="ca-send-btn">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
-                                                    viewBox="0 0 24 24" fill="none">
-                                                    <path d="M6 9.86V14.15" stroke="white" stroke-width="1.5"
-                                                        stroke-linecap="round" />
-                                                    <path d="M9 8.43V15.57" stroke="white" stroke-width="1.5"
-                                                        stroke-linecap="round" />
-                                                    <path d="M12 7V17" stroke="white" stroke-width="1.5"
-                                                        stroke-linecap="round" />
-                                                    <path d="M15 8.43V15.57" stroke="white" stroke-width="1.5"
-                                                        stroke-linecap="round" />
-                                                    <path d="M18 9.86V14.15" stroke="white" stroke-width="1.5"
-                                                        stroke-linecap="round" />
-                                                    <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" />
-                                                </svg>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <p class="ca-disc">Colaba can make mistakes. Consider checking important information
-                                    </p>
+                                <div class="ca-msgs" id="caMsgs">
+                                    <!-- Footer will be dynamically appended here after chat messages by JavaScript -->
                                 </div>
                             </div>
                             <!-- <div class="ca-score-col">
@@ -972,7 +918,7 @@
             <div class="container">
                 <div class="why-head1">
 
-                    <h2 class="why-h2">Find your <span class="text-cta"><img class="anim-from-bottom"
+                    <h2 class="why-h2">Find your <span class="text-cta"><img class="anim-from-bottom last"
                                 src="assets/images/cleo/mrketinglast.svg" alt="">
                         </span>
 
@@ -1133,7 +1079,7 @@
                     });
                     observer.unobserve(entry.target);
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.7 });
 
             groups.forEach(function (group) {
                 observer.observe(group);
@@ -1143,6 +1089,7 @@
 
     <script>
         // Scroll reveal — adds .is-visible to any element with an anim-from-* class
+        // EXCEPT marketing badges (.fiction, .m3, .m4) which are triggered by text-cta completion
         (function () {
             var obs = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
@@ -1150,10 +1097,18 @@
                     entry.target.classList.add('is-visible');
                     obs.unobserve(entry.target);
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.7 });
 
             document.querySelectorAll('.anim-from-top, .anim-from-left, .anim-from-right, .anim-from-bottom')
-                .forEach(function (el) { obs.observe(el); });
+                .forEach(function (el) { 
+                    // Skip marketing badges - they will be triggered by text typing completion
+                    if (el.classList.contains('fiction') || 
+                        el.classList.contains('m3') || 
+                        el.classList.contains('m4')) {
+                        return;
+                    }
+                    obs.observe(el); 
+                });
         })();
     </script>
 
@@ -1164,7 +1119,6 @@
             var wrap = document.getElementById('caWrap');
             if (!wrap) return;
             var msgsEl = document.getElementById('caMsgs');
-            var statusEl = document.getElementById('caStatus');
 
             function sleep(ms) {
                 return new Promise(function (resolve) { setTimeout(resolve, ms); });
@@ -1247,23 +1201,22 @@
 
             var started = false;
 
-            async function run() {
+                async function run() {
                 if (started) return;
                 started = true;
-                while (true) {
-                    msgsEl.innerHTML = '';
-                    statusEl.classList.remove('ca-show');
-                    await sleep(500);
+                
+                msgsEl.innerHTML = '';
+                await sleep(500);
 
-                    /* AI message 1 */
-                    var ai1 = addAiMsg();
-                    for (var i = 0; i < SCRIPT[0].paras.length; i++) {
-                        var p1 = document.createElement('p');
-                        ai1.appendChild(p1);
-                        await typeWords(p1, wordList(SCRIPT[0].paras[i]), 68);
-                        if (i < SCRIPT[0].paras.length - 1) await sleep(90);
-                    }
-                    await sleep(750);
+                /* AI message 1 */
+                var ai1 = addAiMsg();
+                for (var i = 0; i < SCRIPT[0].paras.length; i++) {
+                    var p1 = document.createElement('p');
+                    ai1.appendChild(p1);
+                    await typeWords(p1, wordList(SCRIPT[0].paras[i]), 68);
+                    if (i < SCRIPT[0].paras.length - 1) await sleep(90);
+                }
+                await sleep(750);
 
                     /* AI message 2 */
                     var ai2 = addAiMsg();
@@ -1303,10 +1256,62 @@
                     msgsEl.appendChild(opts);
 
                     await sleep(1100);
-                    statusEl.classList.add('ca-show');
-                    await sleep(3200);
-                    await sleep(1800);
-                }
+                    
+                    /* Add footer after all messages and options are done */
+                    await sleep(500);
+                    var footer = document.createElement('div');
+                    footer.className = 'ca-footer';
+                    footer.innerHTML = `
+                        <div class="ca-status ca-show">
+                            <span class="ca-dots"><span></span><span></span><span></span></span>
+                            <span>AI is incorporating your feedback...</span>
+                        </div>
+                        <div class="ca-input-row">
+                            <span class="ca-input-plus">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 5V19" stroke="#8B6914" stroke-width="2" stroke-linecap="round" />
+                                    <path d="M5 12H19" stroke="#8B6914" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </span>
+                            <span class="ca-input-ph">Ask anything...</span>
+                            <div class="ca-input-right">
+                                <span class="ca-mic-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="none">
+                                        <path d="M7.94 14.52C4.61 14.52 1.89 11.8 1.89 8.46V7.22C1.89 6.96 2.1 6.75 2.35 6.75C2.6 6.75 2.81 6.96 2.81 7.22V8.46C2.81 11.29 5.11 13.58 7.94 13.58C10.76 13.58 13.06 11.29 13.06 8.46V7.22C13.06 6.96 13.27 6.75 13.53 6.75C13.78 6.75 13.99 6.96 13.99 7.22V8.46C14 11.8 11.28 14.52 7.94 14.52Z" fill="#404040" fill-opacity="0.5" />
+                                        <path d="M7.94 1.32C5.72 1.32 3.91 3.14 3.91 5.36V8.47C3.91 10.69 5.72 12.51 7.94 12.51C10.17 12.51 11.98 10.69 11.98 8.47V5.36C11.98 3.14 10.17 1.32 7.94 1.32Z" fill="#404040" fill-opacity="0.5" />
+                                        <path d="M8 15.5V14" stroke="#404040" stroke-opacity="0.5" stroke-width="0.93" stroke-linecap="round" />
+                                        <path d="M5.5 15.5H10.5" stroke="#404040" stroke-opacity="0.5" stroke-width="0.93" stroke-linecap="round" />
+                                    </svg>
+                                </span>
+                                <span class="ca-send-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none">
+                                        <path d="M6 9.86V14.15" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M9 8.43V15.57" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M12 7V17" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M15 8.43V15.57" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                        <path d="M18 9.86V14.15" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                                        <circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="ca-disc">Colaba can make mistakes. Consider checking important information</p>
+                    `;
+                    footer.style.opacity = '0';
+                    footer.style.transform = 'translateY(20px)';
+                    footer.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                    msgsEl.appendChild(footer);
+                    
+                    // Trigger smooth animation with proper delay
+                    await sleep(50);
+                    requestAnimationFrame(function() {
+                        requestAnimationFrame(function() {
+                            footer.style.opacity = '1';
+                            footer.style.transform = 'translateY(0)';
+                        });
+                    });
+                    
+                    // Animation complete - no loop, runs only once
             }
 
             var obs = new IntersectionObserver(function (entries) {
@@ -1314,7 +1319,7 @@
                     run();
                     obs.disconnect();
                 }
-            }, { threshold: 0.25 });
+            }, { threshold: 0.7 });
             obs.observe(wrap);
         })();
     </script>
