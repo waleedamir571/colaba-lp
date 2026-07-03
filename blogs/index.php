@@ -24,8 +24,7 @@
                 </div>
                 <p class="hero-disclaimer">Your stories stay yours. Never used to train AI.</p>
             </div> -->
-        
-      
+              
         </div>
 
         <!-- Mockup -->
@@ -114,7 +113,6 @@
     </div>
       <img class="w-100" src="assets/images/blogbg.png" alt="">
 </section>
-
 
 <section class="blog-list-sec" id="blog-list">
     <div class="container">
