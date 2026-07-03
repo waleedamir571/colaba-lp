@@ -1,5 +1,5 @@
 /* =============================================
-   COLABA.AI – style.css  (Pixel-perfect Figma)
+   COLABA.AI â€“ style.css  (Pixel-perfect Figma)
    Colors: bg=#faf7f4 | cta=#e8ac50 | text=#2d3436
            muted=#926faf | surface=#fff | text2=#6b6560
 ============================================= */
@@ -61,7 +61,7 @@ video.nav-logo-img
   transition: all 0.2s ease;
 }
 
-/* SVG responsive wrapper — smaller, charming size (choti) */
+/* SVG responsive wrapper â€” smaller, charming size (choti) */
 .svg-wrapper {
   display: flex;
   justify-content: center;
@@ -309,7 +309,7 @@ svg path {
   color: #aaaaaa;
 }
 
-/* ── Right Column – Full Image ── */
+/* â”€â”€ Right Column â€“ Full Image â”€â”€ */
 .hero-right-col {
   padding: 0;
   overflow: hidden;
@@ -460,7 +460,7 @@ a {
   font-family: Inter !important;
 }
 
-/* ── Buttons ── */
+/* â”€â”€ Buttons â”€â”€ */
 .btn-orange {
   display: inline-flex;
   align-items: center;
@@ -532,7 +532,7 @@ span#typed-text {
   color: #E8AC50;
 }
 
-/* ── NAVBAR ── */
+/* â”€â”€ NAVBAR â”€â”€ */
 .colaba-nav {
   position: absolute;
   top: 0;
@@ -606,7 +606,7 @@ span#typed-text {
   opacity: .85
 }
 
-/* ── HERO ── */
+/* â”€â”€ HERO â”€â”€ */
 .hero-section {
   position: relative;
   min-height: 100vh;
@@ -1078,7 +1078,7 @@ span#typed-text {
   }
 }
 
-/* ── LOGOS MARQUEE ── */
+/* â”€â”€ LOGOS MARQUEE â”€â”€ */
 .logos-sec {
   padding: 36px 0;
   /* border-top: 1px solid rgba(0, 0, 0, .05);
@@ -1163,7 +1163,7 @@ span#typed-text {
   opacity: .7
 }
 
-/* ── WHY SECTION  (exact Figma 3 cards) ── */
+/* â”€â”€ WHY SECTION  (exact Figma 3 cards) â”€â”€ */
 .why-sec {
   padding: 96px 0 80px;
   background: white
@@ -1176,7 +1176,7 @@ span#typed-text {
 .why-h2 {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(28px, 4vw, 57px);
+  font-size: 84px;
   color: var(--primary);
   line-height: 1.15;
   /* letter-spacing: -1.5px; */
@@ -1191,7 +1191,7 @@ span#typed-text {
   font-family: Inter !important;
 }
 
-/* 3 card row – Figma: 3 equal cols, middle highlighted orange */
+/* 3 card row â€“ Figma: 3 equal cols, middle highlighted orange */
 .why-cards-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1366,11 +1366,94 @@ span#typed-text {
   color: rgba(255, 255, 255, 0.9);
 } */
 
-/* ══════════════════════════════════════════════
-   STEPS SECTION — Scroll-pinned sticky layout
+/* â”€â”€ BLOG POST CARD (single card â€” Figma 4691:8467, duplicate + offset in HTML) â”€â”€ */
+.blog-list-sec {
+  padding: 80px 0 96px;
+  background: var(--bg);
+  background: var(--Secondary, #FAF7F4);
+}
+
+.blog-post-row {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.blog-post-img {
+  width: 212px;
+  height: 212px;
+  border-radius: 15px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #d9d9d9;
+}
+
+.title{
+  color: var(--text, #2D3436);
+
+font-size: 73.314px;
+font-style: normal;
+font-weight: 400;
+line-height: 72.081px; /* 98.318% */
+letter-spacing: 0.799px;
+text-transform: capitalize;
+}
+
+.blog-post-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.blog-post-meta {
+  font-family: 'Inter', sans-serif !important;
+  font-size: #6B6560;
+  color: #6B6560;
+}
+
+.blog-post-title {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--primary);
+  letter-spacing: 0.8px;
+  line-height: 1.25;
+}
+
+.blog-post-desc {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 17px;
+  color: var(--primary);
+  line-height: 1.5;
+}
+
+@media (max-width: 767px) {
+  .blog-post-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .blog-post-img {
+    width: 100%;
+    height: 220px;
+  }
+
+  .blog-post-title {
+    font-size: 24px;
+  }
+
+  .blog-post-desc {
+    font-size: 15px;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEPS SECTION â€” Scroll-pinned sticky layout
    Left text stays fixed, right images scroll in
    one by one (exact Figma behaviour)
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 .steps-h2 {
   color: var(--primary, #2D3436);
@@ -1393,7 +1476,7 @@ span#typed-text {
 
 
 
-/* ── Steps Section ── */
+/* â”€â”€ Steps Section â”€â”€ */
 .steps-sec {
   padding-top: 50px;
   padding-bottom: 15px;
@@ -1403,7 +1486,7 @@ span#typed-text {
   margin-bottom: 10px;
 }
 
-/* ── Separate Step Sections ── */
+/* â”€â”€ Separate Step Sections â”€â”€ */
 .step-block {
   padding: 50px 0;
   width: 100%;
@@ -1418,14 +1501,14 @@ span#typed-text {
   opacity: 1 !important;
 }
 
-/* ── Sticky Scroll Wrapper (legacy) ── */
+/* â”€â”€ Sticky Scroll Wrapper (legacy) â”€â”€ */
 .reveal-section {
   height: 300vh;         /* 100vh visible + 200vh scroll travel for 3 panels */
   position: relative;
   overflow: clip;        /* Clips overflowing panels without affecting scroll */
 }
 
-/* ─── Sticky viewport — vertically centered in viewport ─── */
+/* â”€â”€â”€ Sticky viewport â€” vertically centered in viewport â”€â”€â”€ */
 .reveal-sticky {
   position: sticky;
   top: calc((100vh - 650px) / 2);
@@ -1434,7 +1517,7 @@ span#typed-text {
   overflow: hidden;
 }
 
-/* ─── Stage: all panels stack here ─── */
+/* â”€â”€â”€ Stage: all panels stack here â”€â”€â”€ */
 .reveal-stage {
   position: relative;
   width: 100%;
@@ -1444,19 +1527,19 @@ span#typed-text {
   justify-content: center;
 }
 
-/* ─── Individual panel ─── */
+/* â”€â”€â”€ Individual panel â”€â”€â”€ */
 .reveal-panel {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px;         /* Inner breathing room — no outer gap */
+  padding: 0px;         /* Inner breathing room â€” no outer gap */
   will-change: transform;
   opacity: 1 !important;
 }
 
-/* ─── Clip wrapper — controls the wipe reveal ─── */
+/* â”€â”€â”€ Clip wrapper â€” controls the wipe reveal â”€â”€â”€ */
 .reveal-clip {
   width: 100%;
   /* max-width: 900px; */
@@ -1464,13 +1547,13 @@ span#typed-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  clip-path: inset(0 0 100% 0);  /* Starts fully clipped — GSAP animates this open */
+  clip-path: inset(0 0 100% 0);  /* Starts fully clipped â€” GSAP animates this open */
   will-change: clip-path;
   opacity: 1 !important;
   filter: none !important;
 }
 
-/* ─── Image ─── */
+/* â”€â”€â”€ Image â”€â”€â”€ */
 .reveal-panel img {
     /* width: 123%; */
     height: 100%;
@@ -1489,7 +1572,7 @@ span#typed-text {
     /* backface-visibility: hidden; */
 }
 
-/* ─── Reveal sticky responsive heights ─── */
+/* â”€â”€â”€ Reveal sticky responsive heights â”€â”€â”€ */
 @media (max-width: 992px) {
   .reveal-sticky {
     height: 580px;
@@ -1508,7 +1591,7 @@ span#typed-text {
   }
 }
 
-/* ── Mobile (767px aur neeche) ── */
+/* â”€â”€ Mobile (767px aur neeche) â”€â”€ */
 @media (max-width: 767px) {
   .steps-sec {
     padding-top: 10px;
@@ -1599,7 +1682,7 @@ span#typed-text {
   color: #61c454
 }
 
-/* ── step 1 image: Chat UI ── */
+/* â”€â”€ step 1 image: Chat UI â”€â”€ */
 .ss1-chat {
   padding: 20px;
   display: flex;
@@ -1719,7 +1802,7 @@ span#typed-text {
   background: rgba(232, 172, 80, .1)
 }
 
-/* ── step 2 image: Outline UI ── */
+/* â”€â”€ step 2 image: Outline UI â”€â”€ */
 .ss2-wrap {
   background: #e8d8f6;
   min-height: 100%;
@@ -1823,7 +1906,7 @@ span#typed-text {
   color: #747473
 }
 
-/* ── step 3 image: Document page ── */
+/* â”€â”€ step 3 image: Document page â”€â”€ */
 .ss3-wrap {
   background: #fdf7f2;
   min-height: 100%;
@@ -2015,7 +2098,7 @@ span#typed-text {
   left: 7rem;
 }
 
-/* ── SPEAK SECTION ── */
+/* â”€â”€ SPEAK SECTION â”€â”€ */
 .speak-sec {
   padding: 96px 0;
   background: var(--bg)
@@ -2083,10 +2166,10 @@ span#typed-text {
   white-space: nowrap
 }
 
-/* ══════════════════════════════════════════════
-   TESTIMONIALS — exact Figma screenshot match
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   TESTIMONIALS â€” exact Figma screenshot match
    Center card elevated, sides lower + faded
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .testi-sec {
   padding: 96px 0 60px;
   background: white;
@@ -2110,7 +2193,7 @@ span#typed-text {
 
 .testi-sub {font-size: 22px;color: var(--text2);font-family: Inter !important;}
 
-/* ── outer: clips sides, shows peek ── */
+/* â”€â”€ outer: clips sides, shows peek â”€â”€ */
 /* .testi-track-outer {
   position: relative;
   overflow: hidden;
@@ -2123,7 +2206,7 @@ span#typed-text {
 
 
 /* fade edges left/right */
-/* ── track: 3 cards aligned by JS transform ── */
+/* â”€â”€ track: 3 cards aligned by JS transform â”€â”€ */
 .testi-track-outer::before,
 .testi-track-outer::after {
   content: '';
@@ -2199,7 +2282,7 @@ span#typed-text {
   z-index: 2;
 }
 
-/* ── ANIMATION ADDITIONS ONLY — kuch bhi nahi hata ── */
+/* â”€â”€ ANIMATION ADDITIONS ONLY â€” kuch bhi nahi hata â”€â”€ */
 .testi-track-outer {
   position: relative;
   overflow: visible !important;
@@ -2300,7 +2383,7 @@ span#typed-text {
   line-height: 1
 }
 
-/* ── controls ── */
+/* â”€â”€ controls â”€â”€ */
 .testi-controls {
   display: flex;
   align-items: center;
@@ -2350,7 +2433,7 @@ span#typed-text {
   transform: scale(1.4)
 }
 
-/* ── PRICING ── */
+/* â”€â”€ PRICING â”€â”€ */
 .pricing-sec {
   padding: 96px 0 60px;
   background: var(--bg)
@@ -2365,7 +2448,7 @@ span#typed-text {
   font-family: Inter !important;
 }
 
-/* dark panel – exact Figma #2d3436 */
+/* dark panel â€“ exact Figma #2d3436 */
 .pricing-dark {
   background: var(--primary);
   border-radius: 25px;
@@ -2452,7 +2535,7 @@ span#typed-text {
   font-weight: 700
 }
 
-/* browser image – exact Figma offset from top */
+/* browser image â€“ exact Figma offset from top */
 .pricing-browser-wrap {
   /* border: 1.2px solid rgba(255, 255, 255, .08); */
   border-radius: 20px;
@@ -2481,7 +2564,7 @@ span#typed-text {
   flex-wrap: wrap
 }
 
-/* ── FOOTER ── */
+/* â”€â”€ FOOTER â”€â”€ */
 .footer-sec {
   background: white;
   /* border-top: 1px solid var(--border) */
@@ -2491,7 +2574,7 @@ span#typed-text {
   display: flex;
   width: 427.327px;
   height: 46.618px;
-  padding: 12.086px 284.885px 12.086px 20.719px;
+  padding: 12.086px 40.885px 12.086px 20.719px;
   justify-content: center;
   align-items: center;
   gap: 8.633px;
@@ -2520,7 +2603,8 @@ span#typed-text {
 
 /* cta top */
 .footer-cta {
-  padding: 72px 0 40px
+  padding: 72px 0 40px;
+  background: white;
 }
 
 .footer-cta-inner {
@@ -2612,7 +2696,7 @@ span#typed-text {
   opacity: 1
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media(max-width:991px) {
 
   .step-text,
@@ -2932,18 +3016,18 @@ span#typed-text {
   }
 }
 
-/* ══════════════════════════════════════════════
-   STEP PANELS — Unified (Panels 1, 2, 3) — Figma pixel-perfect
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STEP PANELS â€” Unified (Panels 1, 2, 3) â€” Figma pixel-perfect
    Source: node 3650:12775 / 3599:7678
-══════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ── Shared clip override: white bg, stretch children ── */
+/* â”€â”€ Shared clip override: white bg, stretch children â”€â”€ */
 .sp-clip {
   background: #ffffff;
   align-items: stretch !important;
 }
 
-/* ── Two-column row: equal-height columns ── */
+/* â”€â”€ Two-column row: equal-height columns â”€â”€ */
 .sp-row {
   display: flex;
   align-items: stretch;
@@ -2951,7 +3035,7 @@ span#typed-text {
   height: 100%;
 }
 
-/* ══ LEFT column ══════════════════════════════ */
+/* â•â• LEFT column â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .sp-left {
   flex: 0 0 49%;
   /* width: 49%; */
@@ -2964,7 +3048,7 @@ span#typed-text {
   background: #ffffff;
 }
 
-/* Ghost step number — Figma: 247.938px, #faf7f4, top -82px, left -45px */
+/* Ghost step number â€” Figma: 247.938px, #faf7f4, top -82px, left -45px */
 .sp-bg-num {
   position: absolute;
   top: -65px;
@@ -2980,7 +3064,7 @@ span#typed-text {
   z-index: 0;
 }
 
-/* Inner content stack — gap 20.797px from Figma */
+/* Inner content stack â€” gap 20.797px from Figma */
 .sp-inner {
   position: relative;
   z-index: 1;
@@ -2990,7 +3074,7 @@ span#typed-text {
   gap: 20px;
 }
 
-/* Label — Figma: Inter Regular, 12.132px, #926faf, line-height 1.2 */
+/* Label â€” Figma: Inter Regular, 12.132px, #926faf, line-height 1.2 */
 .sp-label {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -3001,7 +3085,7 @@ span#typed-text {
   margin: 0;
 }
 
-/* Heading — Figma: Cal Sans, 41.595px, tracking 0.4159px, #2d3436 */
+/* Heading â€” Figma: Cal Sans, 41.595px, tracking 0.4159px, #2d3436 */
 .sp-heading {
   font-family: "Cal Sans", sans-serif;
   font-size: 41px;
@@ -3013,7 +3097,7 @@ span#typed-text {
   margin: 0;
 }
 
-/* Description — Figma: Inter Regular, 19.064px, #6b6560 */
+/* Description â€” Figma: Inter Regular, 19.064px, #6b6560 */
 .sp-desc {
   font-family: 'Inter', sans-serif;
   font-size: 19px;
@@ -3035,7 +3119,7 @@ span#typed-text {
   margin: 0;
 }
 
-/* Tags row — Figma: gap 9.532px */
+/* Tags row â€” Figma: gap 9.532px */
 .sp-tags {
   display: flex;
   gap: 10px;
@@ -3043,7 +3127,7 @@ span#typed-text {
   align-items: center;
 }
 
-/* Base pill — Figma: Inter Regular, 12.132px, px 8.666px py 6.932px, r 25.997px */
+/* Base pill â€” Figma: Inter Regular, 12.132px, px 8.666px py 6.932px, r 25.997px */
 .sp-tag {
   font-family: 'Inter', sans-serif;
   font-size: 12px;
@@ -3058,7 +3142,7 @@ span#typed-text {
   white-space: nowrap;
 }
 
-/* Green pill — Figma: bg #efffed, border rgba(97,196,84,.21), text #61c454 */
+/* Green pill â€” Figma: bg #efffed, border rgba(97,196,84,.21), text #61c454 */
 .sp-tag-green {
  color: #926FAF;
     border-radius: 25.997px;
@@ -3066,14 +3150,14 @@ span#typed-text {
     background: #F8EFFF;
 }
 
-/* Gold pill — Figma: bg #fffcf6, border rgba(255,208,121,.31), text #e8ac50 */
+/* Gold pill â€” Figma: bg #fffcf6, border rgba(255,208,121,.31), text #e8ac50 */
 .sp-tag-gold {
   background: #fffcf6;
   border: 1px solid rgba(255, 208, 121, 0.31);
   color: #e8ac50;
 }
 
-/* Purple pill — sbadge-purple equivalent */
+/* Purple pill â€” sbadge-purple equivalent */
 .sp-tag-purple {
   background: #f8efff;
   border: 1px solid rgba(146, 111, 175, 0.3);
@@ -3081,7 +3165,7 @@ span#typed-text {
 }
 
 
-/* ══ RIGHT column ══════════════════════════════ */
+/* â•â• RIGHT column â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .sp-right {
   flex: 1 1 0;
   overflow: hidden;
@@ -3098,17 +3182,17 @@ span#typed-text {
   object-fit: cover;
 }
 
-/* Panel 1 — g1.png: text on left half, chat UI on right half → show right */
+/* Panel 1 â€” g1.png: text on left half, chat UI on right half â†’ show right */
 .sp-img-right {
   object-position: right center;
 }
 
-/* Panel 2 — g2.png: chapter cards on left half, text on right half → show left */
+/* Panel 2 â€” g2.png: chapter cards on left half, text on right half â†’ show left */
 .sp-img-left {
   object-position: left center;
 }
 
-/* Panel 3 — gif: contained, floated from top like Figma card (top: 21px) */
+/* Panel 3 â€” gif: contained, floated from top like Figma card (top: 21px) */
 .sp-right-gif {
   display: flex;
   align-items: flex-start;
@@ -3126,7 +3210,7 @@ span#typed-text {
   width: 100%;
 }
 
-/* ── Tablet ≤ 992px ────────────────────────── */
+/* â”€â”€ Tablet â‰¤ 992px â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 992px) {
   .sp-left {
     padding: 40px 32px 40px 40px;
@@ -3151,7 +3235,7 @@ span#typed-text {
   }
 }
 
-/* ── Mobile ≤ 767px: stack vertically ──────── */
+/* â”€â”€ Mobile â‰¤ 767px: stack vertically â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 767px) {
   .sp-row {
     flex-direction: column;
@@ -3207,7 +3291,7 @@ span#typed-text {
   }
 }
 
-/* ── Small mobile ≤ 480px ───────────────────── */
+/* â”€â”€ Small mobile â‰¤ 480px â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 480px) {
   .sp-left {
     padding: 44px 18px 20px;

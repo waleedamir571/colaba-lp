@@ -32,7 +32,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <img src="assets/images/flogo.png" alt="Colaba.ai" class="footer-wm-img" data-aos="fade-up"
+            <img src="../assets/images/flogo.png" alt="Colaba.ai" class="footer-wm-img" data-aos="fade-up"
               data-aos-duration="800" />
           </div>
         </div>
