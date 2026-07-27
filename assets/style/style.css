@@ -968,6 +968,21 @@ em {
     gap: 18px;
 }
 
+.saying-img {
+    opacity: 0;
+    display: inline-block;
+    position: absolute;
+    right: 224px;
+        top: -40%;
+
+    /* transform: translateY(-50%) scale(0.8); */
+}
+
+.why-head1 {
+    position: relative;
+    text-align: center;
+}
+
 .are-saying-deco {
     display: flex;
     flex-direction: column;

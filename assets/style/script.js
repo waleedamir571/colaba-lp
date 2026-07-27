@@ -141,6 +141,20 @@
                 badge.classList.add('is-visible');
             }, 300);
         }
+        
+        // Also trigger saying-img animation
+        var sayingImg = section.querySelector('.saying-img');
+        if (sayingImg) {
+            setTimeout(function() {
+                gsap.to(sayingImg, {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: 'back.out(1.7)',
+                    delay: 0.1
+                });
+            }, 300);
+        }
     }
 
     function isInViewport(el) {

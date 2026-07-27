@@ -138,10 +138,13 @@ if (heroTypedEl) {
 }
 
 // Typing animation for all .text-cta elements (plays once and stops)
-function createTypeAnimation($element, initialDelay = 0) {
+function createTypeAnimation($element, initialDelay = 0, onComplete = null) {
     // Read from data-original-text (saved before clearing on page load)
     const originalText = $element.attr('data-original-text') || $element.text().trim();
-    if (!originalText) return;
+    if (!originalText) {
+        if (onComplete) onComplete();
+        return;
+    }
 
     let charIndex = 0;
 
@@ -152,8 +155,10 @@ function createTypeAnimation($element, initialDelay = 0) {
             charIndex++;
             const delay = charIndex < 6 ? 110 : charIndex < 20 ? 72 : 48;
             setTimeout(animateType, delay);
+        } else {
+            // Animation complete - call the callback
+            if (onComplete) onComplete();
         }
-        // Animation complete - stops here, no deleting, no repeat
     }
 
     // Start animation after initial delay
@@ -177,7 +182,22 @@ document.querySelectorAll('.text-cta').forEach((el, index) => {
                 // Only start animation once
                 if (!el.dataset.animated) {
                     el.dataset.animated = 'true';
-                    createTypeAnimation($(el), 300);
+                    
+                    // Check if this is the "Early Users" element
+                    const isEarlyUsers = el.closest('.why-sec1');
+                    createTypeAnimation($(el), 300, () => {
+                        // If this is the why section, animate the image
+                        const sayingImg = document.querySelector('.saying-img');
+                        if (sayingImg) {
+                            gsap.to(sayingImg, {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.6,
+                                ease: 'back.out(1.7)',
+                                delay: 0.1
+                            });
+                        }
+                    });
                 }
             },
             once: true
@@ -279,80 +299,80 @@ gsap.utils.toArray('.wcard').forEach((card, i) => {
 /* ──────────────────────────────────────────────────
    8. TESTIMONIALS SLIDER — Smooth slide + fade animation
 ────────────────────────────────────────────────── */
-(function(){
-  const ALL = [
-    { name:'Jasmine Lee',     role:'Newcomer Author · Thriller Novel',
-      text:'"As I navigated through my creative blocks, I found inspiration in the most unexpected places. It reminded me that storytelling is all about perspective and discovery."' },
-    { name:'Daniel Rivera',   role:'Debut Author · Fantasy Novel',
-      text:'"The moment I stepped into the world of publishing, I felt an electrifying sense of purpose. My characters began to speak, and the story unfolded in ways I had never imagined."' },
-    { name:'Sarah Mitchell',  role:'First-time Author · Romance Novel',
-      text:'"Coming across Colaba was a revelation. I had been staring at a blank page for months. Within one afternoon, I had a full outline and knew exactly what my book needed to be."' }
-  ];
-
-  let current = 0;
-  let isAnimating = false;
-
-  const outer  = document.querySelector('.testi-track-outer');
-  const cards  = Array.from(document.querySelectorAll('.tcard'));
-
-  // Fixed classes — never change
-  cards[0].className = 'tcard tcard-side';
-  cards[1].className = 'tcard tcard-center';
-  cards[2].className = 'tcard tcard-side';
-
-  function fillCard(card, data) {
-    card.querySelector('.tcard-uinfo strong').textContent = data.name;
-    card.querySelector('.tcard-uinfo span').textContent   = data.role;
-    card.querySelector('.tcard-text').textContent         = data.text;
-  }
-
-  // Initial fill
-  function fillAll() {
-    fillCard(cards[0], ALL[(current + ALL.length - 1) % ALL.length]);
-    fillCard(cards[1], ALL[current]);
-    fillCard(cards[2], ALL[(current + 1) % ALL.length]);
-  }
-  fillAll();
-
-  function slideTo() {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    // Step 1: Slide current cards OUT to left — no full disappear
-    gsap.to(cards, {
-      x: -60,
-      opacity: 0.15,
-      duration: 0.4,
-      ease: 'power2.in',
-      stagger: 0.04,
-      onComplete: () => {
-
-        // Step 2: Update data
-        current = (current + 1) % ALL.length;
-        fillAll();
-
-        // Step 3: Set cards to right side instantly
-        gsap.set(cards, { x: 60, opacity: 0.15 });
-
-        // Step 4: Slide IN from right — smooth
-        gsap.to(cards, {
-          x: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.04,
-          onComplete: () => {
-            isAnimating = false;
-          }
-        });
-      }
-    });
-  }
-
-  // Auto-rotate every 4 seconds
-  setInterval(slideTo, 4000);
-
-})();
+// (function(){
+//   const ALL = [
+//     { name:'Jasmine Lee',     role:'Newcomer Author · Thriller Novel',
+//       text:'"As I navigated through my creative blocks, I found inspiration in the most unexpected places. It reminded me that storytelling is all about perspective and discovery."' },
+//     { name:'Daniel Rivera',   role:'Debut Author · Fantasy Novel',
+//       text:'"The moment I stepped into the world of publishing, I felt an electrifying sense of purpose. My characters began to speak, and the story unfolded in ways I had never imagined."' },
+//     { name:'Sarah Mitchell',  role:'First-time Author · Romance Novel',
+//       text:'"Coming across Colaba was a revelation. I had been staring at a blank page for months. Within one afternoon, I had a full outline and knew exactly what my book needed to be."' }
+//   ];
+//
+//   let current = 0;
+//   let isAnimating = false;
+//
+//   const outer  = document.querySelector('.testi-track-outer');
+//   const cards  = Array.from(document.querySelectorAll('.tcard'));
+//
+//   // Fixed classes — never change
+//   cards[0].className = 'tcard tcard-side';
+//   cards[1].className = 'tcard tcard-center';
+//   cards[2].className = 'tcard tcard-side';
+//
+//   function fillCard(card, data) {
+//     card.querySelector('.tcard-uinfo strong').textContent = data.name;
+//     card.querySelector('.tcard-uinfo span').textContent   = data.role;
+//     card.querySelector('.tcard-text').textContent         = data.text;
+//   }
+//
+//   // Initial fill
+//   function fillAll() {
+//     fillCard(cards[0], ALL[(current + ALL.length - 1) % ALL.length]);
+//     fillCard(cards[1], ALL[current]);
+//     fillCard(cards[2], ALL[(current + 1) % ALL.length]);
+//   }
+//   fillAll();
+//
+//   function slideTo() {
+//     if (isAnimating) return;
+//     isAnimating = true;
+//
+//     // Step 1: Slide current cards OUT to left — no full disappear
+//     gsap.to(cards, {
+//       x: -60,
+//       opacity: 0.15,
+//       duration: 0.4,
+//       ease: 'power2.in',
+//       stagger: 0.04,
+//       onComplete: () => {
+//
+//         // Step 2: Update data
+//         current = (current + 1) % ALL.length;
+//         fillAll();
+//
+//         // Step 3: Set cards to right side instantly
+//         gsap.set(cards, { x: 60, opacity: 0.15 });
+//
+//         // Step 4: Slide IN from right — smooth
+//         gsap.to(cards, {
+//           x: 0,
+//           opacity: 1,
+//           duration: 0.5,
+//           ease: 'power2.out',
+//           stagger: 0.04,
+//           onComplete: () => {
+//             isAnimating = false;
+//           }
+//         });
+//       }
+//     });
+//   }
+//
+//   // Auto-rotate every 4 seconds
+//   setInterval(slideTo, 4000);
+//
+// })();
 
 /* ──────────────────────────────────────────────────
    7. SPEAK SECTION entrance + bar animations
@@ -426,54 +446,59 @@ ScrollTrigger.create({
   once: true,
   onEnter: () => {
     // Animate dark panel
-    gsap.from('.pricing-dark', {
-      opacity: 0, 
-      y: 60, 
-      duration: 0.9, 
-      ease: 'power3.out'
-    });
-    
-    // Repeating typing animation for price
-    const priceText = "$20,000 - $80,000";
-    const priceEl = document.getElementById('pc-big-price');
-    const strikeEl = document.getElementById('pc-strike');
-    
-    function startTypingCycle() {
-      let priceCharI = 0;
-      
-      // Reset elements
-      priceEl.textContent = "";
-      gsap.set(strikeEl, { width: 0, opacity: 0 });
-      
-      function typePrice() {
-        if (priceCharI <= priceText.length) {
-          priceEl.textContent = priceText.substring(0, priceCharI);
-          priceCharI++;
-          setTimeout(typePrice, 60);
-        } else {
-          // After typing, animate the strike line
-          gsap.fromTo(strikeEl, 
-            { width: 0, opacity: 0 },
-            { 
-              width: '100%', 
-              opacity: 1, 
-              duration: 0.8, 
-              ease: 'power2.out', 
-              delay: 0.3,
-              onComplete: () => {
-                // Wait 2 seconds then restart the cycle
-                setTimeout(startTypingCycle, 2000);
-              }
-            }
-          );
-        }
+      const pricingDark = document.querySelector('.pricing-dark');
+      if (pricingDark) {
+        gsap.from(pricingDark, {
+          opacity: 0, 
+          y: 60, 
+          duration: 0.9, 
+          ease: 'power3.out'
+        });
       }
       
-      typePrice();
-    }
-    
-    // Start first cycle after a delay
-    setTimeout(startTypingCycle, 800);
+      // Repeating typing animation for price
+      const priceText = "$20,000 - $80,000";
+      const priceEl = document.getElementById('pc-big-price');
+      const strikeEl = document.getElementById('pc-strike');
+      
+      if (priceEl && strikeEl) {
+        function startTypingCycle() {
+          let priceCharI = 0;
+          
+          // Reset elements
+          priceEl.textContent = "";
+          gsap.set(strikeEl, { width: 0, opacity: 0 });
+          
+          function typePrice() {
+            if (priceCharI <= priceText.length) {
+              priceEl.textContent = priceText.substring(0, priceCharI);
+              priceCharI++;
+              setTimeout(typePrice, 60);
+            } else {
+              // After typing, animate the strike line
+              gsap.fromTo(strikeEl, 
+                { width: 0, opacity: 0 },
+                { 
+                  width: '100%', 
+                  opacity: 1, 
+                  duration: 0.8, 
+                  ease: 'power2.out', 
+                  delay: 0.3,
+                  onComplete: () => {
+                    // Wait 2 seconds then restart the cycle
+                    setTimeout(startTypingCycle, 2000);
+                  }
+                }
+              );
+            }
+          }
+          
+          typePrice();
+        }
+        
+        // Start first cycle after a delay
+        setTimeout(startTypingCycle, 800);
+      }
     
     // Animate browser image fade up
     gsap.from('.pricing-browser-wrap', {
@@ -618,8 +643,8 @@ $('.speak-card').on('click', function(){
 
       // Filter out excluded sections
       if (excludeSelector) {
-        const excludedElements = document.querySelectorAll(excludeSelector);
-        elements = elements.filter(el => !excludedElements.contains(el));
+        const excludedElements = Array.from(document.querySelectorAll(excludeSelector));
+        elements = elements.filter(el => !excludedElements.some(excluded => excluded.contains(el)));
       }
 
       // Filter out elements that contain .text-cta (they have their own typing animation)

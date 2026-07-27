@@ -1,861 +1,114 @@
-/* ============================================================
-   COLABA.AI – script.js
-   GSAP 3 + ScrollTrigger  |  jQuery  |  Vanilla JS
-============================================================ */
+(() => {
+  const root = document.documentElement;
+  const themeButton = document.querySelector('.theme-toggle');
+  const label = themeButton.querySelector('.theme-label');
+  const icon = themeButton.querySelector('.theme-icon');
+  const preferred = localStorage.getItem('colaba-theme') ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-gsap.registerPlugin(ScrollTrigger);
+  function setTheme(theme) {
+    root.dataset.theme = theme;
+    const dark = theme === 'dark';
+    themeButton.setAttribute('aria-pressed', String(dark));
+    themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
+    label.textContent = dark ? 'Light' : 'Dark';
+    icon.textContent = dark ? '☀' : '☾';
+    localStorage.setItem('colaba-theme', theme);
+  }
+  setTheme(preferred);
+  themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
 
-/* ──────────────────────────────────────────────────
-   0. AOS INITIALIZATION
-────────────────────────────────────────────────── */
-// Initialize AOS (Animate On Scroll)
-document.addEventListener('DOMContentLoaded', function() {
-  AOS.init({
-    duration: 800,
-    easing: 'ease-out-cubic',
-    once: false,
-    offset: 200, // Section 200px viewport mein aane ke baad animate ho
-    delay: 0,
-    disable: false,
-    startEvent: 'load' // Page load hone ke baad start
+  const menuButton = document.querySelector('.menu-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  menuButton.addEventListener('click', () => {
+    const open = mobileNav.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(open));
   });
-  AOS.refresh();
-});
-
-// Handle animations in both directions (up and down scroll)
-window.addEventListener('scroll', function() {
-  const elements = document.querySelectorAll('[data-aos]');
-  
-  elements.forEach(element => {
-    const elementTop = element.getBoundingClientRect().top;
-    const elementBottom = element.getBoundingClientRect().bottom;
-    const windowHeight = window.innerHeight;
-    
-    // Check if element is in viewport
-    if (elementTop < windowHeight && elementBottom > 0) {
-      // Element is visible - apply animation
-      element.classList.add('aos-animate');
-    } else {
-      // Element is not visible - remove animation so it can trigger again
-      element.classList.remove('aos-animate');
-    }
-  });
-}, { passive: true });
-
-/* ──────────────────────────────────────────────────
-   1. NAVBAR
-────────────────────────────────────────────────── */
-$(window).on('scroll', function(){
-  $('#navbar').toggleClass('scrolled', $(this).scrollTop() > 30);
-});
-
-$('#hamburger').on('click', function(){
-  $('#mobile-menu').toggleClass('open');
-});
-$('#mobile-menu a').on('click', function(){
-  $('#mobile-menu').removeClass('open');
-});
-
-/* ──────────────────────────────────────────────────
-   2. HERO ENTRANCE  (GSAP timeline)
-────────────────────────────────────────────────── */
-const heroTL = gsap.timeline({ delay: 0.3 });
-
-// Y emblem
-heroTL.to('#hero-emblem', {
-  opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.6)'
-});
-
-// Tagline
-heroTL.from('#hero-tagline', {
-  opacity: 0, y: 20, duration: 0.55, ease: 'power3.out'
-}, '-=0.2');
-
-// Email form
-heroTL.to('#hero-email', {
-  opacity: 1, y: 0, duration: 0.55, ease: 'power3.out'
-}, '-=0.25');
-
-// Mockup
-heroTL.to('#hero-mockup', {
-  opacity: 1, y: 0, duration: 0.85, ease: 'power3.out'
-}, '-=0.3');
-
-// Float cards staggered
-heroTL.to(['#hf-left', '#hf-r1', '#hf-r2'], {
-  opacity: 1, x: 0, stagger: 0.12, duration: 0.55, ease: 'power3.out'
-}, '-=0.5');
-
-// Gentle float loops
-gsap.to('#hf-left', { y: -9, duration: 2.8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
-gsap.to('#hf-r1',   { y: -12, duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 0.6 });
-gsap.to('#hf-r2',   { y: -7,  duration: 3.8, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1.1 });
-
-/* ──────────────────────────────────────────────────
-   3. TYPING ANIMATION - Hero + text-cta elements
-────────────────────────────────────────────────── */
-
-// Hero typing animation - scroll-triggered, runs once like .text-cta elements
-const HEADING = "Your story deserves to be a book";
-
-function createHeroTypeAnimation(initialDelay = 0) {
-    let charI = 0;
-
-    function typeNext() {
-        // Typing forward only - no deleting, no loop
-        if (charI <= HEADING.length) {
-            let text = HEADING.substring(0, charI);
-            // Sirf "book" word ko yellow karo
-            text = text.replace(/book$/, '<span class="yellow">book</span>');
-            $('#typed-text').html(text);
-            charI++;
-            const delay = charI < 6 ? 110 : charI < 18 ? 72 : 48;
-            setTimeout(typeNext, delay);
-        }
-        // Animation complete - stops here, no repeat
-    }
-    
-    setTimeout(typeNext, initialDelay);
-}
-
-// Scroll-triggered hero typing animation
-const heroTypedEl = document.getElementById('typed-text');
-if (heroTypedEl) {
-    gsap.to(heroTypedEl, {
-        scrollTrigger: {
-            trigger: '.hero-section',
-            start: 'top 80%',
-            onEnter: () => {
-                // Only start animation once
-                if (!heroTypedEl.dataset.animated) {
-                    heroTypedEl.dataset.animated = 'true';
-                    createHeroTypeAnimation(300);
-                }
-            },
-            once: true
-        }
-    });
-}
-
-// Typing animation for all .text-cta elements (plays once and stops)
-function createTypeAnimation($element, initialDelay = 0) {
-    // Read from data-original-text (saved before clearing on page load)
-    const originalText = $element.attr('data-original-text') || $element.text().trim();
-    if (!originalText) return;
-
-    let charIndex = 0;
-
-    function animateType() {
-        // Typing forward only
-        if (charIndex <= originalText.length) {
-            $element.text(originalText.substring(0, charIndex));
-            charIndex++;
-            const delay = charIndex < 6 ? 110 : charIndex < 20 ? 72 : 48;
-            setTimeout(animateType, delay);
-        }
-        // Animation complete - stops here, no deleting, no repeat
-    }
-
-    // Start animation after initial delay
-    setTimeout(animateType, initialDelay);
-}
-
-// Apply typing animation to all .text-cta elements when they come into view
-document.querySelectorAll('.text-cta').forEach((el, index) => {
-    // Save original text and clear immediately so it's not visible before scroll
-    const text = el.textContent.trim();
-    if (text) {
-        el.dataset.originalText = text;
-        el.textContent = '';
-    }
-
-    gsap.to(el, {
-        scrollTrigger: {
-            trigger: el,
-            start: 'top 80%',
-            onEnter: () => {
-                // Only start animation once
-                if (!el.dataset.animated) {
-                    el.dataset.animated = 'true';
-                    createTypeAnimation($(el), 300);
-                }
-            },
-            once: true
-        }
-    });
-});
-
-/* ──────────────────────────────────────────────────
-   4. GSAP FADE-IN  (.gsap-fadein elements)
-────────────────────────────────────────────────── */
-document.querySelectorAll('.gsap-fadein').forEach(el => {
-  gsap.to(el, {
-    scrollTrigger: { trigger: el, start: 'top 82%', once: true },
-    opacity: 1, y: 0, duration: 0.75, ease: 'power3.out'
-  });
-});
-
-/* ──────────────────────────────────────────────────
-   5. WHY SECTION – cards entrance
-────────────────────────────────────────────────── */
-gsap.utils.toArray('.wcard').forEach((card, i) => {
-  gsap.from(card, {
-    scrollTrigger: { trigger: card, start: 'top 85%', once: true },
-    opacity: 0, y: 50, duration: 0.65, delay: i * 0.12, ease: 'power3.out'
-  });
-});
-
-/* ──────────────────────────────────────────────────
-   6. STEPS — Sticky scroll with ScrollTrigger pin
-   Progress 0→.33 = step1, .33→.66 = step2, .66→1 = step3
-────────────────────────────────────────────────── */
-(function () {
-  gsap.registerPlugin(ScrollTrigger);
-
-  const section  = document.getElementById('reveal-section');
-  if (!section) return; /* Sticky scroll disabled — panels are now separate sections */
-
-  const panels   = gsap.utils.toArray('.reveal-panel');
-  const clips    = gsap.utils.toArray('.reveal-clip');
-  const imgs     = gsap.utils.toArray('.reveal-panel img');
-  const total    = panels.length;
-
-  /* ── 1. Set initial states ── */
-  gsap.set(clips[0], { clipPath: 'inset(0 0 0% 0)' });     /* Panel 1 fully visible */
-  gsap.set(imgs[0],  { scale: 1, yPercent: 0 });
-
-  clips.slice(1).forEach((c, i) => {
-    gsap.set(c, { clipPath: 'inset(0 0 100% 0)' });        /* Panels 2–3 fully hidden */
-    gsap.set(imgs[i + 1], { scale: 1, yPercent: 0 });   /* No scale/shift for sharp image */
+  mobileNav.addEventListener('click', () => {
+    mobileNav.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
   });
 
-  /* ── 2. Master timeline scrubbed to scroll ── */
-  const tl = gsap.timeline({ paused: true });
-
-  /*
-   * Each panel transition occupies 1 unit of the timeline.
-   * Total timeline length = total - 1 transitions (between 3 panels = 2 transitions).
-   * ScrollTrigger maps scroll progress → timeline progress.
-   */
-  panels.slice(1).forEach((panel, i) => {
-    const clip    = clips[i + 1];
-    const img     = imgs[i + 1];
-    const prevImg = imgs[i];
-
-    const startPos = i;       /* Timeline position this transition begins */
-
-    tl.to(clip, {
-      clipPath: 'inset(0 0 0% 0)',   /* Wipe open: bottom edge rises from 100% → 0% */
-      duration: 1,
-      ease: 'power2.inOut'
-    }, startPos);
-
-    /* Removed scale animations to keep images sharp */
-  });
-
-  /* ── 3. ScrollTrigger binds scroll to timeline ── */
-  ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',              /* 0px gap at top */
-    end: 'bottom bottom',          /* 0px gap at bottom */
-    scrub: 0.6,                    /* Lag behind scroll slightly — smoother than scrub: true */
-    anticipatePin: 1,              /* Pre-calculates sticky position — no flash on entry */
-    onUpdate(self) {
-      /* Map scroll progress → timeline progress */
-      const progress = self.progress * (total - 1);
-      tl.progress(progress / (total - 1));
-    }
-  });
-
-  /* ── 4. Pin handled by CSS sticky — no GSAP pin needed ── */
-  /*
-   * Using native CSS `position: sticky` instead of GSAP pin avoids
-   * the extra scroll space GSAP's pinSpacing adds. This is what
-   * achieves the true 0px top/bottom gap.
-   */
-
-})();
-
-/* ──────────────────────────────────────────────────
-   8. TESTIMONIALS SLIDER — Smooth slide + fade animation
-────────────────────────────────────────────────── */
-(function(){
-  const ALL = [
-    { name:'Jasmine Lee',     role:'Newcomer Author · Thriller Novel',
-      text:'"As I navigated through my creative blocks, I found inspiration in the most unexpected places. It reminded me that storytelling is all about perspective and discovery."' },
-    { name:'Daniel Rivera',   role:'Debut Author · Fantasy Novel',
-      text:'"The moment I stepped into the world of publishing, I felt an electrifying sense of purpose. My characters began to speak, and the story unfolded in ways I had never imagined."' },
-    { name:'Sarah Mitchell',  role:'First-time Author · Romance Novel',
-      text:'"Coming across Colaba was a revelation. I had been staring at a blank page for months. Within one afternoon, I had a full outline and knew exactly what my book needed to be."' }
-  ];
-
-  let current = 0;
-  let isAnimating = false;
-
-  const outer  = document.querySelector('.testi-track-outer');
-  const cards  = Array.from(document.querySelectorAll('.tcard'));
-
-  // Fixed classes — never change
-  cards[0].className = 'tcard tcard-side';
-  cards[1].className = 'tcard tcard-center';
-  cards[2].className = 'tcard tcard-side';
-
-  function fillCard(card, data) {
-    card.querySelector('.tcard-uinfo strong').textContent = data.name;
-    card.querySelector('.tcard-uinfo span').textContent   = data.role;
-    card.querySelector('.tcard-text').textContent         = data.text;
+  const typeTarget = document.querySelector('[data-typewriter]');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && typeTarget) {
+    const text = typeTarget.dataset.typewriter;
+    typeTarget.textContent = '';
+    let index = 0;
+    const type = () => {
+      typeTarget.textContent = text.slice(0, ++index);
+      if (index < text.length) setTimeout(type, 78);
+    };
+    setTimeout(type, 550);
   }
 
-  // Initial fill
-  function fillAll() {
-    fillCard(cards[0], ALL[(current + ALL.length - 1) % ALL.length]);
-    fillCard(cards[1], ALL[current]);
-    fillCard(cards[2], ALL[(current + 1) % ALL.length]);
-  }
-  fillAll();
+  const track = document.querySelector('.slider-track');
+  document.querySelector('.slider-btn.prev').addEventListener('click', () => track.scrollBy({left: -track.clientWidth * .75, behavior: 'smooth'}));
+  document.querySelector('.slider-btn.next').addEventListener('click', () => track.scrollBy({left: track.clientWidth * .75, behavior: 'smooth'}));
 
-  function slideTo() {
-    if (isAnimating) return;
-    isAnimating = true;
-
-    // Step 1: Slide current cards OUT to left — no full disappear
-    gsap.to(cards, {
-      x: -60,
-      opacity: 0.15,
-      duration: 0.4,
-      ease: 'power2.in',
-      stagger: 0.04,
-      onComplete: () => {
-
-        // Step 2: Update data
-        current = (current + 1) % ALL.length;
-        fillAll();
-
-        // Step 3: Set cards to right side instantly
-        gsap.set(cards, { x: 60, opacity: 0.15 });
-
-        // Step 4: Slide IN from right — smooth
-        gsap.to(cards, {
-          x: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: 'power2.out',
-          stagger: 0.04,
-          onComplete: () => {
-            isAnimating = false;
-          }
-        });
-      }
-    });
-  }
-
-  // Auto-rotate every 4 seconds
-  setInterval(slideTo, 4000);
-
-})();
-
-/* ──────────────────────────────────────────────────
-   7. SPEAK SECTION entrance + bar animations
-────────────────────────────────────────────────── */
-gsap.from('.speak-card', {
-  scrollTrigger: { trigger: '.speak-card', start: 'top 80%', once: true },
-  opacity: 0, y: 40, scale: 0.97, duration: 0.75, ease: 'power3.out'
-});
-gsap.from('.speak-h2', {
-  scrollTrigger: { trigger: '.speak-sec', start: 'top 80%', once: true },
-  opacity: 0, y: 30, duration: 0.6, ease: 'power3.out'
-});
-gsap.from('.speak-sub', {
-  scrollTrigger: { trigger: '.speak-sec', start: 'top 80%', once: true },
-  opacity: 0, y: 20, duration: 0.6, delay: 0.1, ease: 'power3.out'
-});
-
-// Animate SVG bars continuously
-// gsap.to('#bar-1', {
-//   y: -8,
-//   duration: 0.6,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: 'sine.inOut'
-// });
-// gsap.to('#bar-2', {
-//   y: -12,
-//   duration: 0.7,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: 'sine.inOut',
-//   delay: 0.1
-// });
-// gsap.to('#bar-3', {
-//   y: -16,
-//   duration: 0.5,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: 'sine.inOut',
-//   delay: 0.2
-// });
-// gsap.to('#bar-4', {
-//   y: -12,
-//   duration: 0.7,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: 'sine.inOut',
-//   delay: 0.15
-// });
-// gsap.to('#bar-5', {
-//   y: -8,
-//   duration: 0.6,
-//   repeat: -1,
-//   yoyo: true,
-//   ease: 'sine.inOut',
-//   delay: 0.05
-// });
-
-/* ──────────────────────────────────────────────────
-   9. PRICING entrance + animations
-────────────────────────────────────────────────── */
-gsap.from('.pricing-h2', {
-  scrollTrigger: { trigger: '.pricing-sec', start: 'top 80%', once: true },
-  opacity: 0, y: 30, duration: 0.65, ease: 'power3.out'
-});
-
-// Pricing section animations
-ScrollTrigger.create({
-  trigger: '.pricing-dark',
-  start: 'top 75%',
-  once: true,
-  onEnter: () => {
-    // Animate dark panel
-    gsap.from('.pricing-dark', {
-      opacity: 0, 
-      y: 60, 
-      duration: 0.9, 
-      ease: 'power3.out'
-    });
-    
-    // Repeating typing animation for price
-    const priceText = "$20,000 - $80,000";
-    const priceEl = document.getElementById('pc-big-price');
-    const strikeEl = document.getElementById('pc-strike');
-    
-    function startTypingCycle() {
-      let priceCharI = 0;
-      
-      // Reset elements
-      priceEl.textContent = "";
-      gsap.set(strikeEl, { width: 0, opacity: 0 });
-      
-      function typePrice() {
-        if (priceCharI <= priceText.length) {
-          priceEl.textContent = priceText.substring(0, priceCharI);
-          priceCharI++;
-          setTimeout(typePrice, 60);
-        } else {
-          // After typing, animate the strike line
-          gsap.fromTo(strikeEl, 
-            { width: 0, opacity: 0 },
-            { 
-              width: '100%', 
-              opacity: 1, 
-              duration: 0.8, 
-              ease: 'power2.out', 
-              delay: 0.3,
-              onComplete: () => {
-                // Wait 2 seconds then restart the cycle
-                setTimeout(startTypingCycle, 2000);
-              }
-            }
-          );
-        }
-      }
-      
-      typePrice();
-    }
-    
-    // Start first cycle after a delay
-    setTimeout(startTypingCycle, 800);
-    
-    // Animate browser image fade up
-    gsap.from('.pricing-browser-wrap', {
-      scrollTrigger: { 
-        trigger: '.pricing-browser-wrap', 
-        start: 'top 85%', 
-        once: true 
-      },
-      opacity: 0, 
-      y: 80, 
-      duration: 1, 
-      ease: 'power3.out',
-      delay: 0.5
-    });
-  }
-});
-
-/* ──────────────────────────────────────────────────
-   10. FOOTER entrance
-────────────────────────────────────────────────── */
-gsap.from('.footer-cta-copy', {
-  scrollTrigger: { trigger: '.footer-cta', start: 'top 80%', once: true },
-  opacity: 0, x: -30, duration: 0.7, ease: 'power3.out'
-});
-gsap.from('.footer-cta-form', {
-  scrollTrigger: { trigger: '.footer-cta', start: 'top 80%', once: true },
-  opacity: 0, x: 30, duration: 0.7, delay: 0.15, ease: 'power3.out'
-});
-gsap.from('.footer-wm', {
-  scrollTrigger: { trigger: '.footer-wm', start: 'top 90%', once: true },
-  opacity: 0, scale: 0.97, duration: 1, ease: 'power2.out'
-});
-
-/* ──────────────────────────────────────────────────
-   11. HERO BG PARALLAX + Banner zoom
-────────────────────────────────────────────────── */
-gsap.to('.hero-bg-img', {
-  scrollTrigger: { trigger: '.hero-section', start: 'top top', end: 'bottom top', scrub: true },
-  y: 80, ease: 'none'
-});
-
-// Hero banner zoom animation on scroll
-gsap.fromTo('#hero-mockup img',
-  { scale: 0.85, opacity: 0.8 },
-  {
-    scrollTrigger: { 
-      trigger: '.hero-section', 
-      start: 'top top', 
-      end: 'bottom top', 
-      scrub: 1 
-    },
-    scale: 1, 
-    opacity: 1, 
-    ease: 'power2.out'
-  }
-);
-
-/* ──────────────────────────────────────────────────
-   12. EMAIL FORM – validation + success
-────────────────────────────────────────────────── */
-function handleEmail($input, $btn) {
-  const v = $input.val().trim();
-  if (!v || !v.includes('@')) {
-    gsap.to($input, { x: [-5,5,-5,5,0], duration: 0.35, ease: 'power2.inOut' });
-    return;
-  }
-  $btn.text('🎉 You\'re on the list!').prop('disabled', true)
-    .css({ background: '#29ce42', color: 'white' });
-  gsap.from($btn, { scale: 0.85, duration: 0.4, ease: 'back.out(2)' });
-}
-
-// hero form
-$('.hero-section .btn-orange').on('click', function(){
-  handleEmail($(this).closest('.email-pill-box').find('.email-inp'), $(this));
-});
-$('.hero-section .email-inp').on('keypress', function(e){
-  if(e.key==='Enter') handleEmail($(this), $(this).siblings('.btn-orange'));
-});
-
-// footer form
-$('.footer-sec .btn-orange').on('click', function(){
-  handleEmail($(this).closest('.email-pill-box').find('.email-inp'), $(this));
-});
-$('.footer-sec .email-inp').on('keypress', function(e){
-  if(e.key==='Enter') handleEmail($(this), $(this).siblings('.btn-orange'));
-});
-
-/* ──────────────────────────────────────────────────
-   13. SMOOTH ANCHOR SCROLL
-────────────────────────────────────────────────── */
-$('a[href^="#"]').on('click', function(e){
-  const $t = $(this.getAttribute('href'));
-  if($t.length){ e.preventDefault(); $('html,body').animate({ scrollTop: $t.offset().top - 76 }, 600); }
-});
-
-/* ──────────────────────────────────────────────────
-   14. SPEAK SECTION – waveform pulse on hover
-────────────────────────────────────────────────── */
-$('.speak-card').on('mouseenter', function(){
-  gsap.to('.speak-voice-img', { scale: 1.08, duration: 0.3, ease: 'power2.out' });
-}).on('mouseleave', function(){
-  gsap.to('.speak-voice-img', { scale: 1, duration: 0.3, ease: 'power2.out' });
-});
-
-/* Cursor pulse */
-$('.speak-card').on('click', function(){
-  gsap.timeline()
-    .to('.speak-voice-img', { scale: 1.15, duration: 0.2, ease: 'power2.out' })
-    .to('.speak-voice-img', { scale: 1, duration: 0.4, ease: 'elastic.out(1,.5)' });
-});
-
-/* ──────────────────────────────────────────────────
-   VIDEO LOGO DEBUG - Check if video is loading
-────────────────────────────────────────────────── */
-(function() {
-  const videoLogo = document.querySelector('.nav-logo-img');
-  if (videoLogo && videoLogo.tagName === 'VIDEO') {
-    videoLogo.addEventListener('loadeddata', function() {
-      console.log('✅ Video logo loaded successfully');
-    });
-    videoLogo.addEventListener('error', function(e) {
-      console.error('❌ Video logo failed to load:', e);
-      console.log('Trying format:', this.currentSrc || 'no source');
-    });
-  }
-})();
-
-(function() {
-    window.addEventListener('DOMContentLoaded', function() {
-      gsap.registerPlugin(ScrollTrigger);
-
-      // 🔽 YAHAN WO SECTION KA SELECTOR DAALO JIS PAR PHLE SE ANIMATION HAI 🔽
-      const excludeSelector = '.steps-sec, #how-it-works, #hero';   // Exclude hero section to prevent text-cta jitter
-
-      // Saare sections aur .col-md-6 except excludeSelector wale
-      const allSections = Array.from(document.querySelectorAll('section'));
-      const colMd6 = Array.from(document.querySelectorAll('.col-md-6'));
-      const footer = document.querySelector('footer');
-      
-      let elements = [...allSections, ...colMd6];
-      if (footer) elements.push(footer);
-
-      // Filter out excluded sections
-      if (excludeSelector) {
-        const excludedElements = document.querySelectorAll(excludeSelector);
-        elements = elements.filter(el => !excludedElements.contains(el));
-      }
-
-      // Filter out elements that contain .text-cta (they have their own typing animation)
-      elements = elements.filter(el => !el.querySelector('.text-cta'));
-
-      if (!elements.length) return;
-
-      function getDirectionX(index) {
-        return (index % 2 === 0) ? -70 : 70;
-      }
-
-      // Initially set hidden state
-      elements.forEach((el, idx) => {
-        const xVal = getDirectionX(idx);
-        gsap.set(el, { opacity: 0, x: xVal });
-      });
-
-      const timelines = [];
-      elements.forEach((el, idx) => {
-        const xVal = getDirectionX(idx);
-        const tl = gsap.timeline({ paused: true });
-        tl.to(el, { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" });
-        
-        ScrollTrigger.create({
-          trigger: el,
-          start: "top 85%",
-          end: "bottom 15%",
-          toggleActions: "restart none restart none",
-          animation: tl,
-        });
-        timelines.push({ el, tl });
-      });
-
-      // Elements already in viewport should not stay hidden
-      function animateVisibleNow() {
-        timelines.forEach(({ el, tl }) => {
-          const rect = el.getBoundingClientRect();
-          const winHeight = window.innerHeight;
-          if (rect.top < winHeight && rect.bottom > 0) {
-            tl.progress(1);
-          } else {
-            tl.progress(0);
-          }
-        });
-      }
-
-      setTimeout(animateVisibleNow, 50);
-      window.addEventListener('resize', () => setTimeout(animateVisibleNow, 100));
-      ScrollTrigger.refresh();
-    });
-  })();
-
- 
-
-
-  (function() {
-    // ------------------------------------------------------------------
-    // PROFESSIONAL SOUND-LIKE ANIMATION (smooth, organic & continuous)
-    // Instead of simple translation, we apply scaleY from exact bottom anchor
-    // This mimics real sound bars that expand upward from a fixed baseline.
-    // Each bar stays rooted at its bottom coordinate and "breathes" / pulses
-    // like an audio visualizer. Delays & durations create a wave effect.
-    // ------------------------------------------------------------------
-    
-    // Define bottom Y coordinates for each bar (derived from original path 'd' attribute)
-    // bar-1: M18.666 47.8355 V80.2514 => bottom Y = 80.2514
-    // bar-2: bottom Y = 90.9841
-    // bar-3: bottom Y = 101.786
-    // bar-4: bottom Y = 90.9841
-    // bar-5: bottom Y = 80.2514
-    // X coordinates: used to set precise transformOrigin (bottom center anchor)
-    // Anchor format: `${x}px ${bottomY}px` ensures scaling happens from bottom of each bar.
-    
-    const barsData = [
-      { id: "#bar-1", x: 18.666, bottomY: 80.2514, scalePeak: 1.18, duration: 0.62, delay: 0.0, ease: "sine.inOut" },
-      { id: "#bar-2", x: 41.334, bottomY: 90.9841, scalePeak: 1.24, duration: 0.7,  delay: 0.1, ease: "sine.inOut" },
-      { id: "#bar-3", x: 64.0039, bottomY: 101.786, scalePeak: 1.16, duration: 0.68, delay: 0.2, ease: "sine.inOut" },
-      { id: "#bar-4", x: 86.6719, bottomY: 90.9841, scalePeak: 1.23, duration: 0.66, delay: 0.15, ease: "sine.inOut" },
-      { id: "#bar-5", x: 109.34, bottomY: 80.2514, scalePeak: 1.18, duration: 0.6,  delay: 0.05, ease: "sine.inOut" }
+  // Directional entrances follow the alternating composition in the Figma.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const revealGroups = [
+      ['.problem .two-col > :first-child, .audio .two-col > :first-child, .case-study .two-col > :first-child', 'reveal-left'],
+      ['.problem .two-col > :last-child, .audio .two-col > :last-child, .case-study .two-col > :last-child', 'reveal-right'],
+      ['.step-card:nth-of-type(1), .step-card:nth-of-type(3)', 'reveal-left'],
+      ['.step-card:nth-of-type(2)', 'reveal-right'],
+      ['.section > .eyebrow, .section > h2, .section > p:not(.eyebrow)', 'reveal-up'],
+      ['.pipeline-card, .promise, .tools-cta', 'reveal-scale'],
+      ['.book, .method, .roles p, .three-cards article, .testimonial-grid blockquote, .tool-grid article, .accordion details', 'reveal-up']
     ];
-    
-    // Additional micro-tuning: for smoother feel, we choose peak scales that aren't extreme
-    // but produce a clear 'pumping' sound-like rhythm. Values between 1.15~1.26 create
-    // noticeable yet elegant motion — "thori choti" movement but very expressive.
-    // Slightly lower amplitude than an aggressive visualizer, perfect for smooth UI.
-    
-    // Make sure GSAP is ready
-    if (typeof gsap !== "undefined") {
-      
-      // Ensure any existing animations are cleared (clean start)
-      barsData.forEach(bar => {
-        const element = document.querySelector(bar.id);
-        if (element) {
-          // Kill previous tweens to avoid conflicts (fresh state)
-          gsap.killTweensOf(element);
-          // reset transform to identity (no scale initially)
-          gsap.set(element, { scaleY: 1, transformOrigin: `${bar.x}px ${bar.bottomY}px` });
+    const revealItems = [];
+    revealGroups.forEach(([selector, direction]) => {
+      document.querySelectorAll(selector).forEach((element, index) => {
+        if (element.classList.contains('reveal-ready')) return;
+        element.classList.add('reveal-ready', direction);
+        if (index % 3) element.classList.add(`reveal-delay-${index % 3}`);
+        revealItems.push(element);
+      });
+    });
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, {threshold: .12, rootMargin: '0px 0px -7% 0px'});
+    revealItems.forEach(element => revealObserver.observe(element));
+  }
+
+  function wave(canvas, footer = false) {
+    const ctx = canvas.getContext('2d');
+    let width, height, frame = 0;
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      width = rect.width; height = rect.height;
+      canvas.width = width * dpr; canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    addEventListener('resize', resize, {passive:true});
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      const dark = root.dataset.theme === 'dark';
+      ctx.fillStyle = dark ? 'rgba(255,255,255,.16)' : 'rgba(32,38,40,.19)';
+      const base = footer ? height * .68 : height * .43;
+      const cols = Math.ceil(width / 15);
+      const rows = footer ? 23 : 36;
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const x = c * 15;
+          const depth = r / rows;
+          const phase = c * .19 + r * .21 + frame * .018;
+          const y = base + r * (footer ? 11 : 16) + Math.sin(phase) * (8 + depth * 25) + Math.sin(c * .07 + frame * .012) * 22;
+          const radius = .7 + depth * .75;
+          ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill();
         }
-      });
-      
-      // Create the organic continuous animation for each bar
-      // Instead of yoyo on translation, we use scaleY — each bar gracefully expands from bottom
-      // and contracts, exactly like sound meter but with elegant sine easing.
-      // We use .to() with yoyo:true and repeat:-1, which makes animation seamless.
-      // Start from scaleY = 1 (resting full height) -> up to scalePeak -> back to 1 -> loop.
-      // This gives a smooth "bass kick" feel, adjustable per bar.
-      
-      barsData.forEach((bar) => {
-        const elem = document.querySelector(bar.id);
-        if (!elem) return;
-        
-        // Create a seamless infinite animation with proper easing & organic delays.
-        // The result: sound-wave style where bars rise one after another creating a ripple.
-        gsap.to(elem, {
-          scaleY: bar.scalePeak,           // upward extension from bottom anchor
-          duration: bar.duration,
-          repeat: -1,                      // infinite loop
-          yoyo: true,                      // goes up then back down gracefully
-          ease: bar.ease,
-          delay: bar.delay,
-          overwrite: true,
-          // Optional: add a subtle onUpdate for extra smoothness? not needed
-        });
-      });
-      
-      // Additional micro-tuning: for bars that are shorter (bar-1 & bar-5) we used peak 1.18
-      // This creates a coherent "sound wave" group.
-      // Because transformOrigin is set per-element, the bars will never visually detach from ground
-      // and the visual rhythm feels like an audio spectrum analyzer — smooth, responsive and "soun wali feel".
-      
-      // For extra liveliness, we also add a very faint floating effect to the whole SVG (optional)
-      // but not intrusive — can be omitted. Instead, we ensure high performance.
-      
-      // Edge case: If someone wants even smoother motion, we could add a short stagger on first load,
-      // but infinite yoyo with delays already creates beautiful staggered undulation.
-      
-      // Bonus: small dynamic adjustment to make animation slightly more "musical"
-      // We set a tiny random variance for repeat refresh? Not needed, sine wave is perfect.
-      
-      // Additional enhancement: the bars also respond to hover (just for fun) - no requirement,
-      // but increases modern UX. (Doesn't break continuous animation)
-      const svgElement = document.querySelector('svg');
-      if (svgElement) {
-        svgElement.addEventListener('mouseenter', () => {
-          // Subtle speed-up effect on hover - playful, but not required (won't affect main loop)
-          barsData.forEach(bar => {
-            const tween = gsap.getTweensOf(document.querySelector(bar.id));
-            if (tween.length) {
-              tween[0].timeScale(1.3);
-            }
-          });
-        });
-        svgElement.addEventListener('mouseleave', () => {
-          barsData.forEach(bar => {
-            const tween = gsap.getTweensOf(document.querySelector(bar.id));
-            if (tween.length) {
-              tween[0].timeScale(1);
-            }
-          });
-        });
       }
-      
-      // Optional Console reassurance: animation running flawlessly
-      console.log("🎵 Sound wave animation is live — smooth vertical expansion from fixed baseline, compact & pleasing.");
-      
-    } else {
-      console.warn("GSAP not loaded — animation will not run.");
+      if (!reduce) { frame++; requestAnimationFrame(draw); }
     }
-  })();
-
-
-/* ──────────────────────────────────────────────────
-   VIDEO SCROLL CONTROL - Play video only for visible section
-   Jis section par ho sirf wahi video chale, baaki sab pause
-────────────────────────────────────────────────── */
-(function() {
-  // Get all step videos
-  const stepVideos = document.querySelectorAll('.step-video');
-  
-  if (!stepVideos.length) return;
-
-  // Track which videos have played completely (ek baar puri chal chuki hai)
-  const completedVideos = new Set();
-
-  // Add event listener to track when video completes
-  stepVideos.forEach(video => {
-    video.addEventListener('ended', function() {
-      completedVideos.add(this.dataset.step);
-      console.log(`✅ Video ${this.dataset.step} completed`);
-    });
-  });
-
-  // Create Intersection Observer
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const video = entry.target;
-      const stepNumber = video.dataset.step;
-
-      // When video section enters viewport
-      if (entry.isIntersecting) {
-        // Stop all other videos first
-        stepVideos.forEach(v => {
-          if (v !== video && !v.paused) {
-            v.pause();
-            console.log(`⏸️ Video ${v.dataset.step} paused`);
-          }
-        });
-
-        // Play current video only if not completed
-        if (!completedVideos.has(stepNumber)) {
-          video.loop = false; // No loop
-          video.play()
-            .then(() => {
-              console.log(`▶️ Video ${stepNumber} playing`);
-            })
-            .catch(err => console.log('Video play error:', err));
-        } else {
-          console.log(`⏭️ Video ${stepNumber} already played, skipping`);
-        }
-      } else {
-        // When section leaves viewport, pause the video
-        if (!video.paused) {
-          video.pause();
-          console.log(`⏸️ Video ${stepNumber} paused (out of view)`);
-        }
-      }
-    });
-  }, {
-    threshold: 0.5, // 50% of section must be visible
-    rootMargin: '0px'
-  });
-
-  // Observe all step videos
-  stepVideos.forEach(video => {
-    videoObserver.observe(video);
-  });
-
-  console.log('🎬 Video scroll control initialized - one video at a time, plays once only');
+    draw();
+  }
+  wave(document.querySelector('#wave-canvas'));
+  wave(document.querySelector('#footer-wave'), true);
 })();

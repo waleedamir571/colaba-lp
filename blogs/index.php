@@ -4,18 +4,18 @@
   HERO
 ================================================ -->
 <section class="hero-section" id="hero">
-    <div class="hero-bg-wrap">
-        <!-- <img src="https://www.figma.com/api/mcp/asset/e64e5913-397c-46e0-8b8e-872c0b883985" alt="" class="hero-bg-img" /> -->
-    </div>
+  <div class="hero-bg-wrap">
+    <!-- <img src="https://www.figma.com/api/mcp/asset/e64e5913-397c-46e0-8b8e-872c0b883985" alt="" class="hero-bg-img" /> -->
+  </div>
 
-    <div class="container hero-container">
-        <!-- Heading block -->
-        <div class="hero-text-center">
-            <!-- <div class="hero-y-emblem" id="hero-emblem">Y</div> -->
-           <h2 class="why-h2">Our latest <span class="text-cta"> Blog Posts</span></h2>
-            <p class="hero-tagline" id="">Explore the latest news and updates, tips and tricks, and <br> discover
-                new ways to level up your creativity.</p>
-            <!-- <div class="hero-email-wrap" id="hero-email">
+  <div class="container hero-container">
+    <!-- Heading block -->
+    <div class="hero-text-center">
+      <!-- <div class="hero-y-emblem" id="hero-emblem">Y</div> -->
+      <h2 class="why-h2">Our latest <span class="text-cta"> Blog Posts</span></h2>
+      <p class="hero-tagline" id="">Explore the latest news and updates, tips and tricks, and <br> discover
+        new ways to level up your creativity.</p>
+      <!-- <div class="hero-email-wrap" id="hero-email">
                 <div class="email-row">
                     <div class="email-pill-box">
                         <input type="email" placeholder="Enter Your email" class="email-inp" />
@@ -24,13 +24,13 @@
                 </div>
                 <p class="hero-disclaimer">Your stories stay yours. Never used to train AI.</p>
             </div> -->
-              
-        </div>
 
-        <!-- Mockup -->
-        <div class="hero-mockup" id="hero-mockup">
-            <!-- Float left -->
-            <!-- <div class="hf-card hf-left" id="hf-left">
+    </div>
+
+    <!-- Mockup -->
+    <div class="hero-mockup" id="hero-mockup">
+      <!-- Float left -->
+      <!-- <div class="hf-card hf-left" id="hf-left">
           <img src="https://www.figma.com/api/mcp/asset/a79d84e0-b938-4f4b-a876-5dd3b84485f0" width="28" height="28"
             alt="" />
           <div class="hf-info">
@@ -42,9 +42,9 @@
           </div>
         </div> -->
 
-            <!-- Chat UI -->
-            <img class="w-100" src="assets/images/banner.png" alt="">
-            <!-- <div class="chat-ui-box">
+      <!-- Chat UI -->
+      <img class="w-100" src="assets/images/banner.png" alt="">
+      <!-- <div class="chat-ui-box">
           <div class="cu-header">
             <div class="cu-logo">
               <div class="cu-logo-sq"></div>
@@ -98,8 +98,8 @@
           </div>
         </div> -->
 
-            <!-- Float right cards -->
-            <!-- <div class="hf-card hf-r1" id="hf-r1">
+      <!-- Float right cards -->
+      <!-- <div class="hf-card hf-r1" id="hf-r1">
           <div class="hf-icon hf-icon-or"><img
               src="https://www.figma.com/api/mcp/asset/a827082d-f1a8-4531-adde-b0bf6b3db3d8" width="18" alt="" /></div>
           <span>I want to write my life story or memoir</span>
@@ -109,42 +109,375 @@
               src="https://www.figma.com/api/mcp/asset/26ad3d91-9b1d-43a7-b006-82f4faa24435" width="18" alt="" /></div>
           <span>I have a self-help book idea to share</span>
         </div> -->
-        </div><!-- /hero-mockup -->
-    </div>
-      <img class="w-100" src="assets/images/blogbg.png" alt="">
+    </div><!-- /hero-mockup -->
+  </div>
+  <img class="w-100" src="assets/images/blogbg.png" alt="">
 </section>
 
 <section class="blog-list-sec" id="blog-list">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+
+        <div class="blog-post-row mb-5">
+          <img src="assets/images/post1.svg" alt="How history and science influence writing" class="blog-post-img" />
+          <div class="blog-post-content">
+            <p class="blog-post-meta">October 10, 2025 by Kate</p>
+            <h3 class="blog-post-title">How history and science influence writing</h3>
+            <p class="blog-post-desc">Is Claude Sonnet 4.5 the best model for writers? We put it to the
+              test with a series of writing experiments, comparing it to GPT-5 and Opus 4.1.</p>
+          </div>
+        </div>
+        <!-- copy the .blog-post-row block above for every additional post -->
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+
+        <div class="blog-post-row mb-5">
+          <img src="assets/images/post1.svg" alt="How history and science influence writing" class="blog-post-img" />
+          <div class="blog-post-content">
+            <p class="blog-post-meta">October 10, 2025 by Kate</p>
+            <h3 class="blog-post-title">How history and science influence writing</h3>
+            <p class="blog-post-desc">Is Claude Sonnet 4.5 the best model for writers? We put it to the
+              test with a series of writing experiments, comparing it to GPT-5 and Opus 4.1.</p>
+          </div>
+        </div>
+        <!-- copy the .blog-post-row block above for every additional post -->
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-sec1" id="why">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-
-                <div class="blog-post-row mb-5">
-                    <img src="assets/images/post1.svg" alt="How history and science influence writing" class="blog-post-img" />
-                    <div class="blog-post-content">
-                        <p class="blog-post-meta">October 10, 2025 by Kate</p>
-                        <h3 class="blog-post-title">How history and science influence writing</h3>
-                        <p class="blog-post-desc">Is Claude Sonnet 4.5 the best model for writers? We put it to the
-                            test with a series of writing experiments, comparing it to GPT-5 and Opus 4.1.</p>
-                    </div>
-                </div>
-                <!-- copy the .blog-post-row block above for every additional post -->
-
+        <div class="why-head1">
+            <p class="why-sub1">CLEO, ACCORDING TO AUTHORS</p>
+            <div class="testi-h2-outer">
+                <h2 class="why-h2">What <span class="text-cta">Early Users</span>
+               <img src="assets/images/saying.svg" alt="" class="saying-img">
+                </h2>
             </div>
         </div>
-         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
+    </div>
 
-                <div class="blog-post-row mb-5">
-                    <img src="assets/images/post1.svg" alt="How history and science influence writing" class="blog-post-img" />
-                    <div class="blog-post-content">
-                        <p class="blog-post-meta">October 10, 2025 by Kate</p>
-                        <h3 class="blog-post-title">How history and science influence writing</h3>
-                        <p class="blog-post-desc">Is Claude Sonnet 4.5 the best model for writers? We put it to the
-                            test with a series of writing experiments, comparing it to GPT-5 and Opus 4.1.</p>
+    <!-- Testimonials: 3-column Bootstrap row, infinite auto-scroll -->
+    <div class="testi-scroll-sec">
+        <div class="testi-fade-top"></div>
+        <div class="testi-fade-bottom"></div>
+        <div class="container">
+            <div class="row g-4">
+
+                <!-- ── Col 1: scrolls UP ── -->
+                <div class="col-md-4">
+                    <div class="testi-track testi-up">
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Amazing to work with"</p>
+                                <p class="tcard-text">The Modall team is absolutely amazing to work with, would
+                                    highly recommend!</p>
+                                <p class="tcard-name">Nicole C.</p>
+                                <p class="tcard-role">Marketing Director at TFI Canada</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Exceptional Service"</p>
+                                <p class="tcard-text">The team at Modall provided exceptional service and delivered
+                                    above and beyond our expectations!</p>
+                                <p class="tcard-name">James R.</p>
+                                <p class="tcard-role">Product Manager at Tech Innovations</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Highly Professional"</p>
+                                <p class="tcard-text">Working with Modall was a breath of fresh air. They are highly
+                                    professional and delivered on time!</p>
+                                <p class="tcard-name">Sara L.</p>
+                                <p class="tcard-role">Creative Lead at Design Co.</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Incredible Results"</p>
+                                <p class="tcard-text">Our project was transformed thanks to Modall's expertise.
+                                    Incredible results that speak for themselves!</p>
+                                <p class="tcard-name">Tom K.</p>
+                                <p class="tcard-role">CEO at Future Solutions</p>
+                            </div>
+                        </div>
+                        <!-- duplicate for seamless loop -->
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Amazing to work with"</p>
+                                <p class="tcard-text">The Modall team is absolutely amazing to work with, would
+                                    highly recommend!</p>
+                                <p class="tcard-name">Nicole C.</p>
+                                <p class="tcard-role">Marketing Director at TFI Canada</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Exceptional Service"</p>
+                                <p class="tcard-text">The team at Modall provided exceptional service and delivered
+                                    above and beyond our expectations!</p>
+                                <p class="tcard-name">James R.</p>
+                                <p class="tcard-role">Product Manager at Tech Innovations</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Highly Professional"</p>
+                                <p class="tcard-text">Working with Modall was a breath of fresh air. They are highly
+                                    professional and delivered on time!</p>
+                                <p class="tcard-name">Sara L.</p>
+                                <p class="tcard-role">Creative Lead at Design Co.</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Incredible Results"</p>
+                                <p class="tcard-text">Our project was transformed thanks to Modall's expertise.
+                                    Incredible results that speak for themselves!</p>
+                                <p class="tcard-name">Tom K.</p>
+                                <p class="tcard-role">CEO at Future Solutions</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- copy the .blog-post-row block above for every additional post -->
+
+                <!-- ── Col 2: scrolls DOWN ── -->
+                <div class="col-md-4">
+                    <div class="testi-track testi-down">
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Highly Professional"</p>
+                                <p class="tcard-text">Modall's professionalism and expertise make collaboration a
+                                    breeze. Truly a top-notch team!</p>
+                                <p class="tcard-name">Emily R.</p>
+                                <p class="tcard-role">Creative Lead at Visionary Solutions</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Incredible Results"</p>
+                                <p class="tcard-text">I am consistently impressed with the results delivered by
+                                    Modall. They know how to get the job done right!</p>
+                                <p class="tcard-name">James L.</p>
+                                <p class="tcard-role">CEO at Future Insights</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Great Partnership"</p>
+                                <p class="tcard-text">Partnering with Modall has been a game-changer for our
+                                    projects. They bring creativity and innovation!</p>
+                                <p class="tcard-name">Samantha K.</p>
+                                <p class="tcard-role">Operations Head at NextGen Corp</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Transformative Experience"</p>
+                                <p class="tcard-text">Working with Modall has transformed our approach to design and
+                                    user experience. Their insights are invaluable!</p>
+                                <p class="tcard-name">Michael B.</p>
+                                <p class="tcard-role">UX Director at Techwave</p>
+                            </div>
+                        </div>
+                        <!-- duplicate for seamless loop -->
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Highly Professional"</p>
+                                <p class="tcard-text">Modall's professionalism and expertise make collaboration a
+                                    breeze. Truly a top-notch team!</p>
+                                <p class="tcard-name">Emily R.</p>
+                                <p class="tcard-role">Creative Lead at Visionary Solutions</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Incredible Results"</p>
+                                <p class="tcard-text">I am consistently impressed with the results delivered by
+                                    Modall. They know how to get the job done right!</p>
+                                <p class="tcard-name">James L.</p>
+                                <p class="tcard-role">CEO at Future Insights</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Great Partnership"</p>
+                                <p class="tcard-text">Partnering with Modall has been a game-changer for our
+                                    projects. They bring creativity and innovation!</p>
+                                <p class="tcard-name">Samantha K.</p>
+                                <p class="tcard-role">Operations Head at NextGen Corp</p>
+                            </div>
+                        </div>
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Transformative Experience"</p>
+                                <p class="tcard-text">Working with Modall has transformed our approach to design and
+                                    user experience. Their insights are invaluable!</p>
+                                <p class="tcard-name">Michael B.</p>
+                                <p class="tcard-role">UX Director at Techwave</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── Col 3: scrolls UP (slower) ── -->
+                <div class="col-md-4">
+                    <div class="testi-track testi-up testi-up-slow">
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Exceptional Service"</p>
+                                <p class="tcard-text">The level of service provided by Modall is exceptional. They
+                                    really go above and beyond!</p>
+                                <p class="tcard-name">Mark T.</p>
+                                <p class="tcard-role">Product Manager at Innovatech</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Outstanding Communication"</p>
+                                <p class="tcard-text">The communication with Modall is outstanding. They keep us
+                                    informed every step of the way!</p>
+                                <p class="tcard-name">David H.</p>
+                                <p class="tcard-role">Marketing Director at Creative Minds</p>
+                            </div>
+                        </div>
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Impressive Adaptability"</p>
+                                <p class="tcard-text">Modall's ability to adapt to our changing needs has been
+                                    remarkable. They deliver solutions that fit perfectly!</p>
+                                <p class="tcard-name">Laura P.</p>
+                                <p class="tcard-role">Product Owner at Agile Enterprises</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Great Partnership"</p>
+                                <p class="tcard-text">Partnering with Modall has been a game-changer for our
+                                    projects. They bring creativity and innovation!</p>
+                                <p class="tcard-name">Samantha K.</p>
+                                <p class="tcard-role">Operations Head at NextGen Corp</p>
+                            </div>
+                        </div>
+                        <!-- duplicate for seamless loop -->
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Exceptional Service"</p>
+                                <p class="tcard-text">The level of service provided by Modall is exceptional. They
+                                    really go above and beyond!</p>
+                                <p class="tcard-name">Mark T.</p>
+                                <p class="tcard-role">Product Manager at Innovatech</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Outstanding Communication"</p>
+                                <p class="tcard-text">The communication with Modall is outstanding. They keep us
+                                    informed every step of the way!</p>
+                                <p class="tcard-name">David H.</p>
+                                <p class="tcard-role">Marketing Director at Creative Minds</p>
+                            </div>
+                        </div>
+                        <div class="tcard1">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Impressive Adaptability"</p>
+                                <p class="tcard-text">Modall's ability to adapt to our changing needs has been
+                                    remarkable. They deliver solutions that fit perfectly!</p>
+                                <p class="tcard-name">Laura P.</p>
+                                <p class="tcard-role">Product Owner at Agile Enterprises</p>
+                            </div>
+                        </div>
+                        <div class="tcard1 tcard-cream">
+                            <div class="tcard-stars"><span class="tstar">★</span><span class="tstar">★</span><span
+                                    class="tstar">★</span><span class="tstar">★</span><span class="tstar empty">★</span>
+                            </div>
+                            <div>
+                                <p class="tcard-title">"Great Partnership"</p>
+                                <p class="tcard-text">Partnering with Modall has been a game-changer for our
+                                    projects. They bring creativity and innovation!</p>
+                                <p class="tcard-name">Samantha K.</p>
+                                <p class="tcard-role">Operations Head at NextGen Corp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
