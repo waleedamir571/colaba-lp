@@ -1,0 +1,26 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="20" height="20" fill="#1F1F1F"/>
+<g id="New Colaba-Dark">
+<rect width="1920" height="19784" transform="translate(-242 -12402)" fill="#010418"/>
+<g id="Group 1171276254">
+<g id="Glass Cards Grid">
+<foreignObject x="-58" y="-58" width="522.667" height="231"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(8px);clip-path:url(#bgblur_0_7046_2_clip_path);height:100%;width:100%"></div></foreignObject><g id="Glass Card 1" data-figma-bg-blur-radius="16">
+<rect x="-42" y="-42" width="490.667" height="199" rx="24" fill="white" fill-opacity="0.0196078"/>
+<rect x="-41.5" y="-41.5" width="489.667" height="198" rx="23.5" stroke="white" stroke-opacity="0.121569"/>
+<g id="Icon Container">
+<rect x="-10" y="-10" width="40" height="40" rx="12" fill="#E8AC50" fill-opacity="0.101961"/>
+<g id="globe" clip-path="url(#clip1_7046_2)">
+<path id="Vector" d="M18.334 10C18.334 14.6028 14.6027 18.334 10 18.334M18.334 10C18.334 5.39727 14.6027 1.66602 10 1.66602M18.334 10H1.666M10 18.334C5.39726 18.334 1.666 14.6028 1.666 10M10 18.334C7.86002 16.087 6.6664 13.103 6.6664 10C6.6664 6.89705 7.86002 3.91299 10 1.66602M10 18.334C12.14 16.087 13.3336 13.103 13.3336 10C13.3336 6.89705 12.14 3.91299 10 1.66602M10 1.66602C5.39726 1.66602 1.666 5.39727 1.666 10" stroke="#E8AC50" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="bgblur_0_7046_2_clip_path" transform="translate(58 58)"><rect x="-42" y="-42" width="490.667" height="199" rx="24"/>
+</clipPath><clipPath id="clip1_7046_2">
+<rect width="20" height="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>
